@@ -59,6 +59,9 @@
           <h1 class="topbar__title" id="pageTitle">Quản Lý Key & Thời Hạn License</h1>
           <div class="topbar__subtitle" id="pageSubtitle">Cấu hình thời gian hết hạn (Ngày/Tháng/Năm), kích hoạt & gỡ HWID thiết bị</div>
         </div>
+        <div style="margin-left:16px;display:flex;align-items:center;gap:12px;">
+          <div id="astronautCanvas" style="width:140px;height:84px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#071022,#0b1322);box-shadow:0 8px 20px rgba(2,6,23,0.6);"></div>
+        </div>
         <div class="topbar__actions">
           <span class="firebase-badge">
             <span class="firebase-badge__dot"></span>
@@ -294,6 +297,8 @@
   </div>
 
   <div id="adminToast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+  <script src="js/astronaut.js"></script>
   <script src="js/admin.js?v=9"></script>
 </body>
 </html>

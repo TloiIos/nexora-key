@@ -171,9 +171,15 @@ function initRegisterForm() {
     registry.push({ username: u, password: p, email: email, role: "Customer", registeredAt: new Date().toISOString() });
     localStorage.setItem(AUTH_CONFIG.usersRegistryKey, JSON.stringify(registry));
 
-    if (successEl) successEl.textContent = "Đăng ký khách hàng thành công! Tài khoản này không dùng để truy cập admin.";
-    toast("Tạo tài khoản khách hàng thành công!");
-    form.reset();
+    // Auto-login the newly registered customer (session only)
+    sessionStorage.setItem(AUTH_CONFIG.customerSessionKey, "1");
+    sessionStorage.setItem("nexora_customer_user", u);
+
+    if (successEl) successEl.textContent = "Đăng ký thành công — Đang đăng nhập...";
+    toast("Đăng ký thành công! Đang chuyển đến trang khách...");
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 700);
   });
 }
 
