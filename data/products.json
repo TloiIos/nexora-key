@@ -1,0 +1,74 @@
+[
+  {
+    "id": "p001",
+    "name": "Acc Liên Quân Mobile - Rank Cao Thủ",
+    "price": 890000,
+    "category": "Liên Quân Mobile",
+    "rank": "Cao Thủ",
+    "server": "SS30",
+    "image": "https://picsum.photos/seed/lqm-vip1/700/700",
+    "description": "45 tướng, 120 skin (có SS+), full ngọc bổ trợ, đăng nhập Facebook riêng.",
+    "stock": 1,
+    "featured": true
+  },
+  {
+    "id": "p002",
+    "name": "Acc Valorant - Full Skin Elderflame",
+    "price": 2150000,
+    "category": "Valorant",
+    "rank": "Kim Cương",
+    "server": "Asia",
+    "image": "https://picsum.photos/seed/valorant-vip1/700/700",
+    "description": "Bộ súng Elderflame + Reaver, 30+ agent, Radianite dư dả.",
+    "stock": 1,
+    "featured": true
+  },
+  {
+    "id": "p003",
+    "name": "Acc Liên Minh Huyền Thoại - Bạch Kim",
+    "price": 650000,
+    "category": "Liên Minh Huyền Thoại",
+    "rank": "Bạch Kim",
+    "server": "VN",
+    "image": "https://picsum.photos/seed/lol-vip1/700/700",
+    "description": "120 tướng, 60 trang phục, có trang phục Huyền Thoại.",
+    "stock": 2,
+    "featured": false
+  },
+  {
+    "id": "p004",
+    "name": "Acc Free Fire - VIP Kim Cương Max",
+    "price": 1290000,
+    "category": "Free Fire",
+    "rank": "Heroic",
+    "server": "VN",
+    "image": "https://picsum.photos/seed/ff-vip1/700/700",
+    "description": "Kho skin súng max độ hiếm, pet max cấp, đầy đủ emote hiếm.",
+    "stock": 1,
+    "featured": true
+  },
+  {
+    "id": "p005",
+    "name": "Acc PUBG Mobile - Conqueror",
+    "price": 1590000,
+    "category": "PUBG Mobile",
+    "rank": "Conqueror",
+    "server": "Asia",
+    "image": "https://picsum.photos/seed/pubg-vip1/700/700",
+    "description": "Trang phục Mythic đầy đủ, súng khắc full bộ, RP season cao.",
+    "stock": 1,
+    "featured": false
+  },
+  {
+    "id": "p006",
+    "name": "Acc Genshin Impact - AR 58",
+    "price": 3290000,
+    "category": "Genshin Impact",
+    "rank": "AR 58",
+    "server": "Asia",
+    "image": "https://picsum.photos/seed/genshin-vip1/700/700",
+    "description": "12 nhân vật 5 sao, nhiều vũ khí 5 sao limited, nguyên thạch dư.",
+    "stock": 1,
+    "featured": true
+  }
+]

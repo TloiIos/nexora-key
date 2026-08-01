@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXORA KEY — API Key Management & HWID Protection Platform</title>
+  <meta name="description"
+    content="Nền tảng quản lý API Key chuyên nghiệp. Xác thực License, bảo vệ HWID theo thiết bị, tốc độ phản hồi siêu nhanh cho Tool, Bot & Software.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=9">
+</head>
+
+<body>
+
+  <!-- Background Ambient Light System -->
+  <div class="bg-ambient">
+    <div class="bg-ambient__orb bg-ambient__orb--violet"></div>
+    <div class="bg-ambient__orb bg-ambient__orb--cyan"></div>
+    <div class="bg-ambient__orb bg-ambient__orb--emerald"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <!-- ====== SITE HEADER ====== -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__mark">N</span>
+        <span class="logo__wordmark">NEXORA</span>
+        <span class="logo__badge">v2.0</span>
+      </a>
+      <nav class="header-nav">
+        <a href="about.html" class="header-nav__link">Giới Thiệu</a>
+        <a href="#checker" class="header-nav__link">Tra cứu Key</a>
+        <a href="#pricing" class="header-nav__link">Bảng giá</a>
+        <a href="#integration" class="header-nav__link">Tích hợp</a>
+        <a href="#faq" class="header-nav__link">FAQ</a>
+        <a href="login.html" class="btn btn--primary btn--sm" style="margin-left: 12px;">Đăng Nhập</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====== HERO SECTION ====== -->
+  <section class="hero">
+    <div class="hero__grid">
+      <div>
+        <div class="hero__badge">
+          <span class="hero__badge-dot"></span>
+          API Key Management & HWID Protection
+        </div>
+
+        <h1 class="hero__heading">
+          Secure &amp; Automate<br>
+          <span class="hero__heading-accent">License Distribution</span>
+        </h1>
+
+        <p class="hero__description">
+          Giải pháp xác thực License chuyên nghiệp cho Tool, Bot, Software. Kiểm soát thiết bị HWID/UID, chống chia sẻ
+          key trái phép. Phản hồi &lt;20ms qua Firebase Realtime Database.
+        </p>
+
+        <div class="hero__actions">
+          <button class="btn btn--primary btn--lg" id="heroBuyBtn">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            </svg>
+            Mua Key Ngay
+          </button>
+          <a href="#checker" class="btn btn--ghost btn--lg">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            Tra cứu Key
+          </a>
+        </div>
+      </div>
+
+      <!-- 3D Astronaut Illustration -->
+      <div class="hero__astronaut">
+        <div class="astronaut__ambient"></div>
+        <div class="astronaut__orbit"></div>
+        <div class="astronaut__orbit astronaut__orbit--inner"></div>
+
+        <svg class="astronaut__figure" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body suit -->
+          <ellipse cx="250" cy="280" rx="95" ry="110" fill="url(#suitGrad)" stroke="hsl(228,38%,22%)"
+            stroke-width="3" />
+          <!-- Suit detail lines -->
+          <path d="M195 240 C210 320, 290 320, 305 240" stroke="hsl(228,30%,28%)" stroke-width="2" fill="none"
+            opacity="0.6" />
+          <line x1="250" y1="200" x2="250" y2="380" stroke="hsl(228,30%,28%)" stroke-width="1.5" opacity="0.4" />
+          <!-- Suit chest panel -->
+          <rect x="225" y="260" width="50" height="35" rx="6" fill="hsl(228,36%,14%)" stroke="hsl(192,100%,50%)"
+            stroke-width="1" opacity="0.5" />
+          <circle cx="240" cy="275" r="3" fill="hsl(160,84%,39%)" opacity="0.8" />
+          <circle cx="255" cy="275" r="3" fill="hsl(192,100%,50%)" opacity="0.8" />
+          <rect x="232" y="283" width="36" height="2" rx="1" fill="hsl(228,30%,30%)" opacity="0.5" />
+          <rect x="236" y="288" width="28" height="2" rx="1" fill="hsl(228,30%,30%)" opacity="0.3" />
+          <!-- Backpack -->
+          <rect x="155" y="230" width="30" height="80" rx="10" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)"
+            stroke-width="2" />
+          <rect x="315" y="230" width="30" height="80" rx="10" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)"
+            stroke-width="2" />
+          <!-- Helmet -->
+          <circle cx="250" cy="185" r="72" fill="hsl(228,38%,14%)" stroke="hsl(228,30%,28%)" stroke-width="4" />
+          <circle cx="250" cy="185" r="76" fill="none" stroke="hsl(228,36%,20%)" stroke-width="2" opacity="0.5" />
+          <!-- Visor -->
+          <ellipse cx="250" cy="185" rx="52" ry="46" fill="url(#visorGrad)" stroke="hsl(192,100%,42%)"
+            stroke-width="3" />
+          <!-- Visor reflections -->
+          <ellipse cx="232" cy="170" rx="14" ry="10" fill="hsla(0,0%,100%,0.2)" transform="rotate(-15 232 170)" />
+          <ellipse cx="224" cy="178" rx="6" ry="4" fill="hsla(0,0%,100%,0.1)" transform="rotate(-15 224 178)" />
+          <!-- Helmet rim -->
+          <path d="M198 185 A52 52 0 0 1 302 185" fill="none" stroke="hsl(228,30%,30%)" stroke-width="3" />
+          <!-- Arms -->
+          <path d="M155 270 C120 260, 100 300, 115 340" stroke="hsl(228,38%,18%)" stroke-width="24"
+            stroke-linecap="round" fill="none" />
+          <path d="M345 270 C380 260, 400 300, 385 340" stroke="hsl(228,38%,18%)" stroke-width="24"
+            stroke-linecap="round" fill="none" />
+          <!-- Gloves -->
+          <circle cx="115" cy="345" r="14" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)" stroke-width="2" />
+          <circle cx="385" cy="345" r="14" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)" stroke-width="2" />
+          <!-- Legs -->
+          <path d="M215 370 C210 410, 195 440, 190 460" stroke="hsl(228,38%,18%)" stroke-width="22"
+            stroke-linecap="round" fill="none" />
+          <path d="M285 370 C290 410, 305 440, 310 460" stroke="hsl(228,38%,18%)" stroke-width="22"
+            stroke-linecap="round" fill="none" />
+          <!-- Boots -->
+          <ellipse cx="188" cy="468" rx="18" ry="12" fill="hsl(228,36%,14%)" stroke="hsl(228,30%,22%)"
+            stroke-width="2" />
+          <ellipse cx="312" cy="468" rx="18" ry="12" fill="hsl(228,36%,14%)" stroke="hsl(228,30%,22%)"
+            stroke-width="2" />
+          <!-- Antenna -->
+          <line x1="250" y1="113" x2="250" y2="90" stroke="hsl(228,30%,28%)" stroke-width="2" />
+          <circle cx="250" cy="86" r="5" fill="hsl(192,100%,50%)" opacity="0.9" />
+          <circle cx="250" cy="86" r="8" fill="none" stroke="hsl(192,100%,50%)" stroke-width="1" opacity="0.3" />
+          <!-- Floating particles -->
+          <circle cx="100" cy="150" r="3" fill="hsl(252,100%,68%)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="400" cy="200" r="2" fill="hsl(192,100%,50%)" opacity="0.5">
+            <animate attributeName="opacity" values="0.5;0.15;0.5" dur="4s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="380" cy="400" r="2.5" fill="hsl(160,84%,39%)" opacity="0.4">
+            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="3.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="120" cy="380" r="1.5" fill="hsl(38,92%,50%)" opacity="0.5">
+            <animate attributeName="opacity" values="0.5;0.15;0.5" dur="2.8s" repeatCount="indefinite" />
+          </circle>
+          <defs>
+            <radialGradient id="suitGrad" cx="0.5" cy="0.4" r="0.6">
+              <stop offset="0%" stop-color="hsl(228,38%,20%)" />
+              <stop offset="100%" stop-color="hsl(228,36%,12%)" />
+            </radialGradient>
+            <linearGradient id="visorGrad" x1="198" y1="140" x2="302" y2="230" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="hsl(192,100%,55%)" stop-opacity="0.9" />
+              <stop offset="50%" stop-color="hsl(252,100%,68%)" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="hsl(192,80%,35%)" stop-opacity="0.8" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- Floating info cards -->
+        <div class="astronaut__info-card astronaut__info-card--bottom">
+          <div class="info-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <div>
+            <div class="info-card__label">HWID Protected</div>
+            <div class="info-card__value">Firebase Realtime Sync</div>
+          </div>
+        </div>
+
+        <div class="astronaut__info-card astronaut__info-card--top">
+          <div class="info-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <div>
+            <div class="info-card__label">99.9% Uptime</div>
+            <div class="info-card__value">SSL Encrypted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== STATS BAR ====== -->
+  <div class="stats-bar">
+    <div class="stats-bar__grid">
+      <div class="stat-card">
+        <div class="stat-card__number" id="statKeysTotal">0</div>
+        <div class="stat-card__label">Keys Issued</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statKeysActive">0</div>
+        <div class="stat-card__label">Active Licenses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statDevices">0</div>
+        <div class="stat-card__label">Registered Devices</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number">99.9%</div>
+        <div class="stat-card__label">Service Uptime</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== KEY CHECKER ====== -->
+  <section class="checker" id="checker">
+    <div class="checker__card">
+      <div class="checker__header">
+        <div>
+          <div class="checker__title">
+            <svg class="checker__title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            Tra cứu trạng thái API Key
+          </div>
+          <div class="checker__description">Nhập mã Key (Firebase Node ID) để kiểm tra thời hạn, HWID và trạng thái xác
+            thực.</div>
+        </div>
+        <span class="status-pill status-pill--active">
+          <span class="status-pill__dot"></span>
+          Firebase Online
+        </span>
+      </div>
+
+      <div class="checker__form">
+        <div class="checker__input-wrap">
+          <input type="text" id="checkKeyInput" class="checker__input"
+            placeholder="Dán mã Key tại đây (VD: 8Ttza-yTK9p-Qwd0g-QOPPW)">
+        </div>
+        <button class="btn btn--secondary" id="checkKeyBtn">
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          Check Key
+        </button>
+      </div>
+
+      <div class="checker__result" id="checkerResult">
+        <div class="checker__result-header">
+          <span class="checker__result-key" id="resKeyCode">KEY_CODE</span>
+          <span class="status-pill status-pill--active" id="resStatusBadge">
+            <span class="status-pill__dot"></span>
+            Active
+          </span>
+        </div>
+
+        <div class="result-grid">
+          <div>
+            <div class="result-grid__item-label">Package</div>
+            <div class="result-grid__item-value" id="resPkgName">&mdash;</div>
+          </div>
+          <div>
+            <div class="result-grid__item-label">Expires</div>
+            <div class="result-grid__item-value" id="resExpiry">&mdash;</div>
+          </div>
+          <div>
+            <div class="result-grid__item-label">Devices (HWID)</div>
+            <div class="result-grid__item-value" id="resDevices">&mdash;</div>
+          </div>
+          <div>
+            <div class="result-grid__item-label">Status Note</div>
+            <div class="result-grid__item-value" id="resNote">&mdash;</div>
+          </div>
+        </div>
+
+        <div class="result__devices-list">
+          Registered HWIDs: <span class="result__devices-value" id="resUidItems">None</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PRICING ====== -->
+  <section class="section pricing" id="pricing">
+    <div class="section__header">
+      <span class="section__tag">License Packages</span>
+      <h2 class="section__title">Chọn Gói API Key Phù Hợp</h2>
+      <p class="section__subtitle">Linh hoạt theo nhu cầu — 1 Key = 1 Thiết Bị HWID. Gói Ngày / Tháng / Năm / Lifetime</p>
+    </div>
+
+    <!-- Duration Tabs -->
+    <div class="duration-tabs">
+      <button class="duration-tab duration-tab--active" id="durDay" data-duration="day">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Gói Ngày
+        <span class="duration-tab__sub">24 giờ</span>
+      </button>
+      <button class="duration-tab" id="durMonth" data-duration="month">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        Gói Tháng
+        <span class="duration-tab__sub">30 ngày</span>
+      </button>
+      <button class="duration-tab" id="durYear" data-duration="year">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Gói Năm
+        <span class="duration-tab__sub">365 ngày</span>
+      </button>
+      <button class="duration-tab" id="durLifetime" data-duration="lifetime">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+        Vĩnh Viễn
+        <span class="duration-tab__sub">Lifetime</span>
+      </button>
+    </div>
+
+    <div class="pricing__grid" id="packageGrid"></div>
+  </section>
+
+  <!-- ====== CODE INTEGRATION ====== -->
+  <section class="section code-section" id="integration">
+    <div class="section__header">
+      <span class="section__tag">Developer Integration</span>
+      <h2 class="section__title">Tích hợp vào Tool/Bot — Copy & Paste</h2>
+      <p class="section__subtitle">Hỗ trợ C#, Python, Node.js, C++ — Xác thực Key qua Firebase REST API</p>
+    </div>
+
+    <div class="code-window">
+      <div class="code-window__header">
+        <div class="code-window__dots">
+          <span class="code-window__dot code-window__dot--close"></span>
+          <span class="code-window__dot code-window__dot--minimize"></span>
+          <span class="code-window__dot code-window__dot--maximize"></span>
+        </div>
+        <div class="code-tabs">
+          <button class="code-tab code-tab--active" data-lang="csharp">C# (.NET)</button>
+          <button class="code-tab" data-lang="python">Python</button>
+          <button class="code-tab" data-lang="nodejs">Node.js</button>
+          <button class="code-tab" data-lang="cpp">C++</button>
+        </div>
+      </div>
+
+      <div class="code-window__body">
+        <button class="code-copy-btn" id="copyCodeBtn">COPY</button>
+
+        <pre class="code-block code-block--active" id="code-csharp"><code>using System;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+public class NexoraKeyValidator
+{
+    private const string FIREBASE_URL =
+        "https://keyb-2f31d-default-rtdb.asia-southeast1.firebasedatabase.app/keys";
+    private static readonly HttpClient _client = new();
+
+    public static async Task&lt;bool&gt; ValidateAsync(string keyId, string hwid)
+    {
+        try
+        {
+            var response = await _client.GetAsync($"{FIREBASE_URL}/{keyId}.json");
+            if (!response.IsSuccessStatusCode) return false;
+
+            var json = await response.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+
+            if (root.GetProperty("status").GetString() != "active") return false;
+
+            long expiresAt = root.GetProperty("expiresAt").GetInt64();
+            if (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() > expiresAt) return false;
+
+            // Register HWID if slot available
+            int maxDevices = root.GetProperty("maxDevices").GetInt32();
+            // ... HWID registration logic
+            return true;
+        }
+        catch { return false; }
+    }
+}</code></pre>
+
+        <pre class="code-block" id="code-python"><code>import requests
+import time
+
+FIREBASE_URL = "https://keyb-2f31d-default-rtdb.asia-southeast1.firebasedatabase.app/keys"
+
+def validate_key(key_id: str, hwid: str) -> dict:
+    """Validate a NEXORA API Key against Firebase Realtime DB."""
+    try:
+        response = requests.get(f"{FIREBASE_URL}/{key_id}.json", timeout=5)
+        response.raise_for_status()
+        data = response.json()
+
+        if not data:
+            return {"valid": False, "reason": "Key not found"}
+
+        if data.get("status") != "active":
+            return {"valid": False, "reason": f"Key status: {data.get('status')}"}
+
+        expires_at = data.get("expiresAt", 0)
+        if expires_at and int(time.time() * 1000) > expires_at:
+            return {"valid": False, "reason": "Key expired"}
+
+        max_devices = data.get("maxDevices", 1)
+        devices = data.get("devices", {})
+
+        if hwid in [d.get("uid") for d in devices.values() if isinstance(d, dict)]:
+            return {"valid": True, "reason": "HWID already registered"}
+
+        if len(devices) >= max_devices:
+            return {"valid": False, "reason": "Device limit reached"}
+
+        return {"valid": True, "reason": "Key validated successfully"}
+
+    except requests.RequestException as e:
+        return {"valid": False, "reason": f"Network error: {e}"}
+
+
+if __name__ == "__main__":
+    result = validate_key("8Ttza-yTK9p-Qwd0g-QOPPW", "HWID-YOUR-DEVICE-ID")
+    print(f"Validation: {result}")</code></pre>
+
+        <pre class="code-block" id="code-nodejs"><code>const https = require('https');
+
+const FIREBASE_URL =
+  'https://keyb-2f31d-default-rtdb.asia-southeast1.firebasedatabase.app/keys';
+
+async function validateKey(keyId, hwid) {
+  try {
+    const res = await fetch(`${FIREBASE_URL}/${keyId}.json`);
+    if (!res.ok) return { valid: false, reason: 'Firebase request failed' };
+
+    const data = await res.json();
+    if (!data) return { valid: false, reason: 'Key not found in database' };
+
+    if (data.status !== 'active') {
+      return { valid: false, reason: `Key status: ${data.status}` };
+    }
+
+    if (data.expiresAt && Date.now() > data.expiresAt) {
+      return { valid: false, reason: 'Key has expired' };
+    }
+
+    const devices = data.devices ? Object.values(data.devices) : [];
+    const maxDevices = data.maxDevices || 1;
+
+    if (devices.some(d => d.uid === hwid)) {
+      return { valid: true, reason: 'HWID already registered' };
+    }
+
+    if (devices.length >= maxDevices) {
+      return { valid: false, reason: 'Device limit exceeded' };
+    }
+
+    return { valid: true, reason: 'Key validated', packageId: data.packageId };
+  } catch (err) {
+    return { valid: false, reason: err.message };
+  }
+}
+
+// Usage
+validateKey('8Ttza-yTK9p-Qwd0g-QOPPW', 'HWID-USER-001')
+  .then(r => console.log(r));</code></pre>
+
+        <pre class="code-block" id="code-cpp"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;curl/curl.h&gt;
+#include &lt;nlohmann/json.hpp&gt;
+
+using json = nlohmann::json;
+
+static size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s) {
+    s->append((char*)contents, size * nmemb);
+    return size * nmemb;
+}
+
+bool ValidateNexoraKey(const std::string& keyId, const std::string& hwid) {
+    CURL* curl = curl_easy_init();
+    if (!curl) return false;
+
+    std::string url =
+        "https://keyb-2f31d-default-rtdb.asia-southeast1.firebasedatabase.app/keys/"
+        + keyId + ".json";
+
+    std::string response;
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+
+    CURLcode res = curl_easy_perform(curl);
+    curl_easy_cleanup(curl);
+
+    if (res != CURLE_OK) return false;
+
+    try {
+        auto data = json::parse(response);
+        if (data.is_null()) return false;
+        if (data["status"] != "active") return false;
+
+        auto expiresAt = data["expiresAt"].get&lt;long long&gt;();
+        auto now = std::chrono::system_clock::now().time_since_epoch();
+        auto ms = std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(now).count();
+
+        if (ms > expiresAt) return false;
+        return true;
+    } catch (...) {
+        return false;
+    }
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== API SANDBOX ====== -->
+  <section class="section sandbox" id="sandbox">
+    <div class="section__header">
+      <span class="section__tag">Interactive Tester</span>
+      <h2 class="section__title">API Sandbox — Live Request</h2>
+      <p class="section__subtitle">Gửi request trực tiếp đến Firebase Realtime Database và xem response JSON</p>
+    </div>
+
+    <div class="sandbox__panel">
+      <div class="sandbox__toolbar">
+        <span class="sandbox__method">GET</span>
+        <input type="text" class="sandbox__url-input"
+          value="https://keyb-2f31d-default-rtdb.asia-southeast1.firebasedatabase.app/keys.json" readonly>
+        <button class="btn btn--primary btn--sm" id="sendApiTestBtn">
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          Send Request
+        </button>
+      </div>
+      <div class="sandbox__response-label">Response Payload</div>
+      <div class="sandbox__console" id="sandboxConsole">{
+        "status": "idle",
+        "message": "Click Send Request to query Firebase Realtime Database..."
+        }</div>
+    </div>
+  </section>
+
+  <!-- ====== FEATURES ====== -->
+  <section class="section" id="features">
+    <div class="section__header">
+      <span class="section__tag">Core Architecture</span>
+      <h2 class="section__title">Tính Năng Nổi Bật</h2>
+    </div>
+
+    <div class="features__grid">
+      <div class="feature-card">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4" />
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Key Generation Engine</h3>
+        <p class="feature-card__text">Sinh chuỗi Key mã hóa ngẫu nhiên chống dò đoán, định dạng chuyên nghiệp với tiền
+          tố tùy chỉnh.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </div>
+        <h3 class="feature-card__title">HWID Device Lock</h3>
+        <p class="feature-card__text">Gán chặt Key với mã phần cứng thiết bị (CPU ID, Motherboard UUID), loại bỏ chia sẻ
+          key bừa bãi.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Firebase Realtime Sync</h3>
+        <p class="feature-card__text">Kết nối trực tiếp Firebase Database REST API — dữ liệu đồng bộ tức thì giữa Admin
+          và Client.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+            <path d="M12 18h.01" />
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Device Management</h3>
+        <p class="feature-card__text">Hỗ trợ Admin gỡ hoặc đổi HWID thiết bị linh hoạt khi người dùng nâng cấp máy.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M3 3v18h18" />
+            <path d="m19 9-5 5-4-4-3 3" />
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Analytics Dashboard</h3>
+        <p class="feature-card__text">Bảng điều khiển trực quan theo dõi số key active, expired, device count và revenue
+          overview.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" x2="12" y1="15" y2="3" />
+          </svg>
+        </div>
+        <h3 class="feature-card__title">JSON Export & Backup</h3>
+        <p class="feature-card__text">Xuất và nạp lại toàn bộ database Key & HWID dưới dạng JSON — bảo toàn dữ liệu an
+          toàn.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FAQ ====== -->
+  <section class="section" id="faq">
+    <div class="section__header">
+      <span class="section__tag">FAQ</span>
+      <h2 class="section__title">Câu Hỏi Thường Gặp</h2>
+    </div>
+
+    <div class="faq__list">
+      <div class="faq-item faq-item--active">
+        <div class="faq-item__question">
+          <span>Mua Key xong thì kích hoạt như thế nào?</span>
+          <svg class="faq-item__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <div class="faq-item__answer">
+          Sau khi thanh toán qua Zalo, Admin sẽ cấp 1 mã Key (VD: <code>8Ttza-yTK9p-Qwd0g-QOPPW</code>). Nhập mã này vào
+          Tool/Phần mềm — hệ thống tự động lấy HWID máy và đăng ký trên Firebase.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__question">
+          <span>Đổi máy tính mới thì có dùng lại Key cũ được không?</span>
+          <svg class="faq-item__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <div class="faq-item__answer">
+          Hoàn toàn được. Liên hệ Admin qua Zalo — Admin vào Dashboard chọn Tab Thiết bị, bấm "Gỡ HWID" để giải phóng
+          slot cho máy mới.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__question">
+          <span>Một Key có thể sử dụng đồng thời nhiều máy không?</span>
+          <svg class="faq-item__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <div class="faq-item__answer">
+          Có, phụ thuộc vào gói License (VD: Starter 1 máy, Pro 2 máy, Developer 5 máy, Lifetime 10 máy). Mỗi máy được
+          đăng ký bằng HWID duy nhất.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__question">
+          <span>Key hết hạn rồi có gia hạn được không?</span>
+          <svg class="faq-item__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <div class="faq-item__answer">
+          Được. Liên hệ Admin để gia hạn Key hiện tại hoặc cấp mã Key mới với thời hạn tương ứng. Dữ liệu HWID cũ được
+          giữ nguyên.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="site-footer">
+    <div style="margin-bottom: 12px;">
+      <a href="index.html" class="logo" style="justify-content:center;display:inline-flex;">
+        <span class="logo__mark">N</span>
+        <span class="logo__wordmark">NEXORA</span>
+      </a>
+    </div>
+    <p class="site-footer__text">&copy; <span id="year"></span> NEXORA Systems. API Key Management & HWID Protection
+      Platform.</p>
+  </footer>
+
+  <!-- Floating Action Button -->
+  <button class="fab" id="floatBuyBtn">
+    <svg class="fab__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+      <path d="M3 6h18" />
+      <path d="M16 10a4 4 0 0 1-8 0" />
+    </svg>
+    Mua Key
+  </button>
+
+  <!-- Buy Modal -->
+  <div class="modal" id="buyModal">
+    <div class="modal__card">
+      <button class="modal__close" id="modalCloseBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+      <h2 class="modal__title">Đặt Mua API Key</h2>
+      <p class="modal__subtitle">Chọn gói License phù hợp để kích hoạt Tool/Bot của bạn.</p>
+
+      <label class="modal__field-label">Select Package</label>
+      <select class="modal__select" id="modalPkgSelect"></select>
+
+      <div class="modal__summary">
+        <div class="modal__summary-row">
+          <span class="modal__summary-label">Thiết bị HWID</span>
+          <span class="modal__summary-value modal__summary-value--accent" id="modalMaxDev">1 device</span>
+        </div>
+        <div class="modal__summary-row">
+          <span class="modal__summary-label">Thời hạn</span>
+          <span class="modal__summary-value" id="modalDuration">30 days</span>
+        </div>
+        <div class="modal__summary-row">
+          <span class="modal__summary-label">Tổng thanh toán</span>
+          <span class="modal__summary-value modal__summary-value--highlight" id="modalTotalPrice">0₫</span>
+        </div>
+      </div>
+
+      <button class="btn btn--secondary btn--lg" id="modalConfirmBtn" style="width:100%;">
+        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+        Liên Hệ Mua Qua Zalo
+      </button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/shop.js?v=9"></script>
+</body>
+
+</html>

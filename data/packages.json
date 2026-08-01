@@ -1,0 +1,42 @@
+[
+  {
+    "id": "pkg_starter",
+    "name": "Gói Starter (7 Ngày)",
+    "price": 50000,
+    "maxDevices": 1,
+    "duration": 7,
+    "description": "Kích hoạt 100% tính năng Tool/Bot\nHỗ trợ 1 thiết bị cố định (HWID/UID)\nTự động gia hạn theo yêu cầu\nBảo hành 1 đổi 1 trong thời gian sử dụng",
+    "featured": false,
+    "category": "Theo Ngày"
+  },
+  {
+    "id": "pkg_pro",
+    "name": "Gói Pro (30 Ngày)",
+    "price": 180000,
+    "maxDevices": 2,
+    "duration": 30,
+    "description": "Toàn bộ tính năng cao cấp không giới hạn\nHỗ trợ 2 thiết bị song song (Home & Office)\nGỡ / Đổi thiết bị 1 lần/tháng miễn phí\nHỗ trợ kỹ thuật ưu tiên 24/7 qua Zalo",
+    "featured": true,
+    "category": "Theo Tháng"
+  },
+  {
+    "id": "pkg_developer",
+    "name": "Gói Developer (90 Ngày)",
+    "price": 450000,
+    "maxDevices": 5,
+    "duration": 90,
+    "description": "Thích hợp cho Dev & Team phát triển\nHỗ trợ tới 5 thiết bị đồng thời\nTốc độ xác thực API ưu tiên <20ms\nCấp quyền API Endpoint mở rộng",
+    "featured": false,
+    "category": "Theo Tháng"
+  },
+  {
+    "id": "pkg_lifetime",
+    "name": "Gói Lifetime (Vĩnh Viễn)",
+    "price": 1200000,
+    "maxDevices": 10,
+    "duration": 0,
+    "description": "Sử dụng vĩnh viễn không giới hạn thời gian\nHỗ trợ tối đa 10 thiết bị cùng lúc\nMiễn phí nâng cấp tất cả phiên bản tương lai\nHỗ trợ riêng 1:1 trực tiếp từ Admin",
+    "featured": true,
+    "category": "Vĩnh Viễn"
+  }
+]

@@ -1,0 +1,698 @@
+/* ============================================================================
+   NEXORA KEY — Authentication Portal
+   Version: 9.0.0  |  File: css/login.css
+   ============================================================================
+
+   Contents:
+   1.  Imports & Design Tokens
+   2.  Reset & Body
+   3.  Ambient Background & Grid
+   4.  Auth Container & Card
+   5.  Brand Header
+   6.  Auth Tabs
+   7.  Form System — Fields, Inputs, Toggles
+   8.  Options Row & SSL Badge
+   9.  Error & Success States
+   10. Action Buttons
+   11. Card Footer
+   12. Toast Notification
+   13. Responsive
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. IMPORTS & DESIGN TOKENS
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800&display=swap');
+
+:root {
+  /* Color Palette */
+  --lc-bg:               hsl(230, 50%, 4%);
+  --lc-surface:          hsl(228, 40%, 9%);
+  --lc-surface-card:     hsl(228, 38%, 11%);
+  --lc-border:           hsla(0, 0%, 100%, 0.1);
+  --lc-border-accent:    hsla(192, 100%, 50%, 0.35);
+
+  --lc-text:             hsl(230, 60%, 97%);
+  --lc-text-muted:       hsl(228, 20%, 65%);
+  --lc-text-dim:         hsl(228, 16%, 45%);
+
+  --lc-cyan:             hsl(192, 100%, 50%);
+  --lc-violet:           hsl(252, 100%, 68%);
+  --lc-emerald:          hsl(160, 84%, 39%);
+  --lc-rose:             hsl(0, 84%, 60%);
+
+  --lc-glow-cyan:        hsla(192, 100%, 50%, 0.32);
+  --lc-glow-violet:      hsla(252, 100%, 68%, 0.28);
+
+  /* Typography */
+  --lc-font-sans:    'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --lc-font-display: 'Plus Jakarta Sans', var(--lc-font-sans);
+  --lc-font-mono:    'JetBrains Mono', 'Cascadia Code', monospace;
+
+  /* Sizes */
+  --lc-text-xs:   0.6875rem;
+  --lc-text-sm:   0.8125rem;
+  --lc-text-base: 0.875rem;
+  --lc-text-md:   0.9375rem;
+  --lc-text-lg:   1rem;
+  --lc-text-xl:   1.125rem;
+  --lc-text-2xl:  1.375rem;
+
+  /* Radius */
+  --lc-radius-xs:   4px;
+  --lc-radius-sm:   8px;
+  --lc-radius-md:   12px;
+  --lc-radius-lg:   16px;
+  --lc-radius-xl:   24px;
+  --lc-radius-full: 9999px;
+
+  /* Shadows */
+  --lc-shadow-glow: 0 0 60px hsla(252, 100%, 68%, 0.18);
+  --lc-shadow-card: 0 24px 64px hsla(0, 0%, 0%, 0.72),
+                    0 0 0 1px hsla(0, 0%, 100%, 0.06);
+
+  /* Motion */
+  --lc-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --lc-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --lc-dur-fast:    120ms;
+  --lc-dur-normal:  200ms;
+  --lc-dur-slow:    360ms;
+}
+
+
+/* ============================================================================
+   2. RESET & BODY
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--lc-bg);
+  color: var(--lc-text);
+  font-family: var(--lc-font-sans);
+  font-size: var(--lc-text-base);
+  line-height: 1.55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+input, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: hsla(192, 100%, 50%, 0.28);
+  color: var(--lc-text);
+}
+
+
+/* ============================================================================
+   3. AMBIENT BACKGROUND & GRID
+   ============================================================================ */
+
+.auth-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.auth-bg__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  will-change: transform;
+}
+
+.auth-bg__orb--violet {
+  top: -18%;
+  left: 18%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(
+    circle,
+    hsla(252, 100%, 68%, 0.20) 0%,
+    hsla(252, 100%, 68%, 0.05) 50%,
+    transparent 70%
+  );
+  animation: orbPulse 18s ease-in-out infinite alternate;
+}
+
+.auth-bg__orb--cyan {
+  bottom: -20%;
+  right: 12%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(
+    circle,
+    hsla(192, 100%, 50%, 0.16) 0%,
+    hsla(192, 100%, 50%, 0.04) 50%,
+    transparent 70%
+  );
+  animation: orbPulse 24s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes orbPulse {
+  0%   { transform: scale(0.90) translate(0, 0); }
+  50%  { transform: scale(1.05) translate(30px, -20px); }
+  100% { transform: scale(0.95) translate(-15px, 25px); }
+}
+
+.auth-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(hsla(0, 0%, 100%, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(0, 0%, 100%, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 55% 55% at 50% 45%, #000 35%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 50% 45%, #000 35%, transparent 80%);
+}
+
+
+/* ============================================================================
+   4. AUTH CONTAINER & CARD
+   ============================================================================ */
+
+.auth-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 460px;
+  animation: cardReveal 0.55s var(--lc-ease-out) forwards;
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.auth-card {
+  background: linear-gradient(
+    148deg,
+    hsla(252, 45%, 18%, 0.62) 0%,
+    hsla(228, 40%, 10%, 0.88) 42%,
+    hsla(300, 30%, 14%, 0.52) 100%
+  );
+  border: 1px solid hsla(0, 0%, 100%, 0.12);
+  border-radius: var(--lc-radius-xl);
+  padding: 42px 38px 36px;
+  box-shadow: var(--lc-shadow-card), var(--lc-shadow-glow);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle shimmer line at top edge */
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(192, 100%, 50%, 0.55) 30%,
+    hsla(252, 100%, 68%, 0.55) 70%,
+    transparent
+  );
+}
+
+
+/* ============================================================================
+   5. BRAND HEADER
+   ============================================================================ */
+
+.auth-card__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.auth-card__logo {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--lc-radius-md);
+  background: linear-gradient(135deg, var(--lc-cyan), var(--lc-violet));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--lc-font-display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--lc-bg);
+  box-shadow: 0 8px 24px var(--lc-glow-cyan), 0 2px 6px hsla(0, 0%, 0%, 0.5);
+  letter-spacing: -0.02em;
+}
+
+.auth-card__brand {
+  font-family: var(--lc-font-display);
+  font-size: var(--lc-text-xl);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.auth-card__sub {
+  font-family: var(--lc-font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--lc-cyan);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 3px;
+  opacity: 0.85;
+}
+
+
+/* ============================================================================
+   6. AUTH TABS
+   ============================================================================ */
+
+.auth-tabs {
+  display: flex;
+  background: hsla(0, 0%, 0%, 0.32);
+  padding: 4px;
+  border-radius: var(--lc-radius-md);
+  border: 1px solid hsla(0, 0%, 100%, 0.08);
+  margin-bottom: 30px;
+  gap: 4px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: var(--lc-radius-sm);
+  font-family: var(--lc-font-display);
+  font-size: var(--lc-text-sm);
+  font-weight: 600;
+  color: var(--lc-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--lc-dur-normal) var(--lc-ease-out);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.auth-tab:hover:not(.auth-tab--active) {
+  color: hsla(0, 0%, 100%, 0.85);
+  background: hsla(0, 0%, 100%, 0.05);
+}
+
+.auth-tab--active {
+  background: linear-gradient(135deg, var(--lc-cyan), hsl(200, 100%, 52%));
+  color: hsl(230, 50%, 4%);
+  font-weight: 800;
+  box-shadow: 0 4px 16px var(--lc-glow-cyan);
+}
+
+
+/* ============================================================================
+   7. FORM SYSTEM
+   ============================================================================ */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.auth-field__label {
+  font-family: var(--lc-font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: hsla(0, 0%, 100%, 0.58);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-left: 2px;
+}
+
+/* Input wrapper allows absolute icon positioning */
+.auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 14px;
+  width: 16px;
+  height: 16px;
+  color: hsla(0, 0%, 100%, 0.35);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 13px 16px 13px 42px;
+  border-radius: var(--lc-radius-md);
+  background: hsla(0, 0%, 0%, 0.36);
+  border: 1px solid hsla(0, 0%, 100%, 0.11);
+  color: #fff;
+  font-size: var(--lc-text-base);
+  outline: none;
+  transition:
+    border-color var(--lc-dur-normal) ease,
+    background var(--lc-dur-normal) ease,
+    box-shadow var(--lc-dur-normal) ease;
+}
+
+.auth-input::placeholder {
+  color: hsla(0, 0%, 100%, 0.28);
+}
+
+.auth-input:focus {
+  border-color: var(--lc-cyan);
+  background: hsla(0, 0%, 0%, 0.52);
+  box-shadow: 0 0 0 3px hsla(192, 100%, 50%, 0.22);
+}
+
+/* Password visibility toggle button */
+.auth-toggle-pw {
+  position: absolute;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--lc-radius-xs);
+  background: none;
+  border: none;
+  color: hsla(0, 0%, 100%, 0.38);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--lc-dur-fast) ease, background var(--lc-dur-fast) ease;
+}
+
+.auth-toggle-pw:hover {
+  color: hsla(0, 0%, 100%, 0.9);
+  background: hsla(0, 0%, 100%, 0.07);
+}
+
+.auth-toggle-pw svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+/* Password input needs right-padding so text doesn't go under the toggle */
+.auth-input[type="password"],
+.auth-input[id="loginPw"],
+.auth-input[id="regPw"],
+.auth-input[id="regConfirmPw"] {
+  padding-right: 46px;
+}
+
+
+/* ============================================================================
+   8. OPTIONS ROW & SSL BADGE
+   ============================================================================ */
+
+.auth-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--lc-text-sm);
+  color: hsla(0, 0%, 100%, 0.62);
+}
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.auth-checkbox input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--lc-cyan);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.auth-ssl-badge {
+  font-family: var(--lc-font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--lc-cyan);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.auth-ssl-badge svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================================
+   9. ERROR & SUCCESS STATES
+   ============================================================================ */
+
+.auth-error {
+  color: var(--lc-rose);
+  font-size: var(--lc-text-sm);
+  font-weight: 600;
+  min-height: 18px;
+  line-height: 1.4;
+  padding-left: 2px;
+  animation: errorShake 0.35s ease forwards;
+}
+
+.auth-error:empty {
+  animation: none;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+.auth-success {
+  color: var(--lc-emerald);
+  font-size: var(--lc-text-sm);
+  font-weight: 600;
+  min-height: 18px;
+  line-height: 1.4;
+  padding-left: 2px;
+}
+
+
+/* ============================================================================
+   10. ACTION BUTTONS
+   ============================================================================ */
+
+.btn-auth {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: var(--lc-radius-full);
+  border: none;
+  font-family: var(--lc-font-display);
+  font-weight: 800;
+  font-size: var(--lc-text-md);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition:
+    transform var(--lc-dur-normal) var(--lc-ease-out),
+    box-shadow var(--lc-dur-normal) ease;
+}
+
+.btn-auth:active {
+  transform: scale(0.97) !important;
+}
+
+.btn-auth svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Primary: Cyan gradient — used for Login */
+.btn-auth--primary {
+  background: linear-gradient(135deg,
+    var(--lc-cyan) 0%,
+    hsl(200, 100%, 48%) 100%
+  );
+  color: hsl(230, 50%, 5%);
+  box-shadow: 0 8px 26px var(--lc-glow-cyan);
+}
+
+.btn-auth--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px hsla(192, 100%, 50%, 0.56);
+}
+
+/* Secondary: Violet gradient — used for Register */
+.btn-auth--secondary {
+  background: linear-gradient(135deg,
+    var(--lc-violet) 0%,
+    hsl(215, 100%, 62%) 100%
+  );
+  color: #fff;
+  box-shadow: 0 8px 26px var(--lc-glow-violet);
+}
+
+.btn-auth--secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px hsla(252, 100%, 68%, 0.56);
+}
+
+
+/* ============================================================================
+   11. CARD FOOTER
+   ============================================================================ */
+
+.auth-card__footer {
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid hsla(0, 0%, 100%, 0.07);
+  text-align: center;
+}
+
+.auth-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--lc-text-sm);
+  color: var(--lc-text-muted);
+  text-decoration: none;
+  transition: color var(--lc-dur-fast) ease;
+}
+
+.auth-card__link:hover {
+  color: var(--lc-cyan);
+}
+
+
+/* ============================================================================
+   12. TOAST NOTIFICATION
+   ============================================================================ */
+
+#authToast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  z-index: 9999;
+  background: hsl(228, 40%, 12%);
+  border: 1px solid var(--lc-border-accent);
+  color: var(--lc-text);
+  padding: 12px 26px;
+  border-radius: var(--lc-radius-full);
+  font-size: var(--lc-text-sm);
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition:
+    opacity 300ms var(--lc-ease-out),
+    transform 300ms var(--lc-ease-out);
+  box-shadow: 0 12px 32px hsla(0, 0%, 0%, 0.55);
+}
+
+#authToast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* ============================================================================
+   13. RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 520px) {
+  body {
+    padding: 16px;
+    align-items: flex-start;
+    padding-top: 32px;
+  }
+
+  .auth-card {
+    padding: 30px 22px 28px;
+  }
+
+  .auth-card__header {
+    gap: 12px;
+  }
+
+  .auth-card__logo {
+    width: 42px;
+    height: 42px;
+    font-size: 1.25rem;
+  }
+
+  .auth-card__brand {
+    font-size: var(--lc-text-lg);
+  }
+
+  .auth-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
