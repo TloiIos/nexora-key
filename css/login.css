@@ -314,6 +314,7 @@ input, select {
 
 .auth-tabs {
   display: flex;
+  flex-direction: column;
   background: hsla(0, 0%, 0%, 0.32);
   padding: 4px;
   border-radius: var(--lc-radius-md);
@@ -323,7 +324,7 @@ input, select {
 }
 
 .auth-tab {
-  flex: 1;
+  width: 100%;
   padding: 10px 12px;
   border-radius: var(--lc-radius-sm);
   font-family: var(--lc-font-display);

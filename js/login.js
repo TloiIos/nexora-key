@@ -9,6 +9,8 @@ const AUTH_CONFIG = {
   defaultPassword: "admin123",
   sessionKey: "nexora_admin_session",
   rememberKey: "nexora_remember_session",
+  customerSessionKey: "nexora_customer_session",
+  customerRememberKey: "nexora_customer_remember",
   usersRegistryKey: "nexora_users_registry_v8"
 };
 
@@ -100,7 +102,7 @@ function initLoginForm() {
     const user = registry.find(user => user.username.toLowerCase() === u.toLowerCase() && user.password === p);
     const isAdminFallback = u === AUTH_CONFIG.defaultUser && p === AUTH_CONFIG.defaultPassword;
 
-    if ((user && user.role === "SuperAdmin") || isAdminFallback) {
+    if (isAdminFallback) {
       if (remember) {
         localStorage.setItem(AUTH_CONFIG.rememberKey, "1");
         localStorage.setItem("nexora_active_user", u);
@@ -113,7 +115,17 @@ function initLoginForm() {
         window.location.href = "admin.html";
       }, 600);
     } else if (user) {
-      if (errorEl) errorEl.textContent = "Tài khoản này không có quyền truy cập admin.";
+      if (remember) {
+        localStorage.setItem(AUTH_CONFIG.customerRememberKey, "1");
+        localStorage.setItem("nexora_customer_user", u);
+      } else {
+        sessionStorage.setItem(AUTH_CONFIG.customerSessionKey, "1");
+        sessionStorage.setItem("nexora_customer_user", u);
+      }
+      toast("Đăng nhập khách hàng thành công!" );
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 600);
     } else {
       if (errorEl) errorEl.textContent = "Tài khoản hoặc mật khẩu không chính xác!";
     }
