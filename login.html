@@ -34,9 +34,9 @@
       </div>
 
       <!-- Auth Tabs: Login vs Register -->
-      <div class="auth-tabs">
-        <button class="auth-tab auth-tab--active" id="tabLoginBtn" type="button">Đăng Nhập</button>
-        <button class="auth-tab" id="tabRegisterBtn" type="button">Đăng Ký Khách Hàng</button>
+      <div class="auth-tabs" style="display:flex; flex-direction:column; gap:4px;">
+        <button class="auth-tab auth-tab--active" id="tabLoginBtn" type="button" style="width:100%;">Đăng Nhập</button>
+        <button class="auth-tab" id="tabRegisterBtn" type="button" style="width:100%;">Đăng Ký Khách Hàng</button>
       </div>
 
       <!-- Login Form -->
@@ -80,6 +80,7 @@
           <div class="auth-note" style="margin-top:12px;color:#9ca3af;font-size:0.9rem;line-height:1.4;">
             Chú ý: chỉ tài khoản admin/admin123 mới vào được trang quản trị. Tài khoản khác là khách hàng.
           </div>
+        </form>
       <!-- Register Form -->
       <form class="auth-form" id="registerForm" style="display:none;">
         <div class="auth-field">
