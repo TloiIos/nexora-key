@@ -17,7 +17,7 @@
 
 <body>
 
-  <!-- Background Ambient Light System -->
+  
   <div class="bg-ambient">
     <div class="bg-ambient__orb bg-ambient__orb--violet"></div>
     <div class="bg-ambient__orb bg-ambient__orb--cyan"></div>
@@ -25,7 +25,7 @@
   </div>
   <div class="bg-grid"></div>
 
-  <!-- ====== SITE HEADER ====== -->
+ 
   <header class="site-header">
     <div class="site-header__inner">
       <a href="index.html" class="logo">
@@ -128,77 +128,15 @@
           <!-- Gloves -->
           <circle cx="115" cy="345" r="14" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)" stroke-width="2" />
           <circle cx="385" cy="345" r="14" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)" stroke-width="2" />
-          <!-- Legs -->
-          <path d="M215 370 C210 410, 195 440, 190 460" stroke="hsl(228,38%,18%)" stroke-width="22"
-            stroke-linecap="round" fill="none" />
-          <path d="M285 370 C290 410, 305 440, 310 460" stroke="hsl(228,38%,18%)" stroke-width="22"
-            stroke-linecap="round" fill="none" />
-          <!-- Boots -->
-          <ellipse cx="188" cy="468" rx="18" ry="12" fill="hsl(228,36%,14%)" stroke="hsl(228,30%,22%)"
-            stroke-width="2" />
-          <ellipse cx="312" cy="468" rx="18" ry="12" fill="hsl(228,36%,14%)" stroke="hsl(228,30%,22%)"
-            stroke-width="2" />
-          <!-- Antenna -->
-          <line x1="250" y1="113" x2="250" y2="90" stroke="hsl(228,30%,28%)" stroke-width="2" />
-          <circle cx="250" cy="86" r="5" fill="hsl(192,100%,50%)" opacity="0.9" />
-          <circle cx="250" cy="86" r="8" fill="none" stroke="hsl(192,100%,50%)" stroke-width="1" opacity="0.3" />
-          <!-- Floating particles -->
-          <circle cx="100" cy="150" r="3" fill="hsl(252,100%,68%)" opacity="0.6">
-            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="400" cy="200" r="2" fill="hsl(192,100%,50%)" opacity="0.5">
-            <animate attributeName="opacity" values="0.5;0.15;0.5" dur="4s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="380" cy="400" r="2.5" fill="hsl(160,84%,39%)" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="3.5s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="120" cy="380" r="1.5" fill="hsl(38,92%,50%)" opacity="0.5">
-            <animate attributeName="opacity" values="0.5;0.15;0.5" dur="2.8s" repeatCount="indefinite" />
-          </circle>
-          <defs>
-            <radialGradient id="suitGrad" cx="0.5" cy="0.4" r="0.6">
-              <stop offset="0%" stop-color="hsl(228,38%,20%)" />
-              <stop offset="100%" stop-color="hsl(228,36%,12%)" />
-            </radialGradient>
-            <linearGradient id="visorGrad" x1="198" y1="140" x2="302" y2="230" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="hsl(192,100%,55%)" stop-opacity="0.9" />
-              <stop offset="50%" stop-color="hsl(252,100%,68%)" stop-opacity="0.7" />
-              <stop offset="100%" stop-color="hsl(192,80%,35%)" stop-opacity="0.8" />
-            </linearGradient>
-          </defs>
-        </svg>
+          <!-- 3D Astronaut Illustration (Three.js canvas replaces SVG) -->
+          <div class="hero__astronaut">
+            <div class="astronaut__ambient"></div>
+            <div class="astronaut__orbit"></div>
+            <div class="astronaut__orbit astronaut__orbit--inner"></div>
 
-        <!-- Floating info cards -->
-        <div class="astronaut__info-card astronaut__info-card--bottom">
-          <div class="info-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-          </div>
-          <div>
-            <div class="info-card__label">HWID Protected</div>
-            <div class="info-card__value">Firebase Realtime Sync</div>
-          </div>
-        </div>
-
-        <div class="astronaut__info-card astronaut__info-card--top">
-          <div class="info-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-          </div>
-          <div>
-            <div class="info-card__label">99.9% Uptime</div>
-            <div class="info-card__value">SSL Encrypted</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+            <div id="astronautCanvas" style="width:360px;height:360px;border-radius:12px;overflow:hidden;background:transparent;">
+              <!-- Canvas injected by js/astronaut.js -->
+            </div>
   <!-- ====== STATS BAR ====== -->
   <div class="stats-bar">
     <div class="stats-bar__grid">
@@ -773,6 +711,8 @@ bool ValidateNexoraKey(const std::string& keyId, const std::string& hwid) {
 
   <div class="toast" id="toast"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+  <script src="js/astronaut.js"></script>
   <script src="js/shop.js?v=10"></script>
 </body>
 
