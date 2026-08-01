@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXORA KEY — Giới Thiệu Hệ Thống Cấp Phát API Key</title>
+  <meta name="description" content="Tìm hiểu về NEXORA KEY — nền tảng quản lý API Key & HWID Protection chuyên nghiệp cho Tool, Bot và Software phát triển.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/about.css?v=9">
+</head>
+
+<body>
+
+  <!-- Ambient Background -->
+  <div class="about-bg">
+    <div class="about-bg__orb about-bg__orb--violet"></div>
+    <div class="about-bg__orb about-bg__orb--cyan"></div>
+    <div class="about-bg__orb about-bg__orb--emerald"></div>
+  </div>
+  <div class="about-grid"></div>
+
+  <!-- Site Header -->
+  <header class="about-header">
+    <div class="about-header__inner">
+      <a href="index.html" class="about-logo">
+        <span class="about-logo__mark">N</span>
+        <span class="about-logo__name">NEXORA KEY</span>
+        <span class="about-logo__badge">v2.0</span>
+      </a>
+      <nav class="about-nav">
+        <a href="index.html" class="about-nav__link">Trang Chủ</a>
+        <a href="about.html" class="about-nav__link about-nav__link--active">Giới Thiệu</a>
+        <a href="index.html#pricing" class="about-nav__link">Bảng Giá</a>
+        <a href="index.html#checker" class="about-nav__link">Tra Cứu Key</a>
+        <a href="index.html" class="about-btn-cta">Mua Key Ngay</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====== HERO ABOUT ====== -->
+  <section class="about-hero">
+    <div class="about-hero__inner">
+      <div class="about-hero__tag">
+        <span class="about-pulse-dot"></span>
+        Về Hệ Thống NEXORA KEY
+      </div>
+      <h1 class="about-hero__heading">
+        Nền Tảng Cấp Phát<br>
+        <span class="about-grad-text">API Key Thế Hệ Mới</span>
+      </h1>
+      <p class="about-hero__desc">
+        NEXORA KEY là hệ thống quản lý License chuyên nghiệp, được thiết kế cho lập trình viên và seller tool game Việt Nam — cho phép kiểm soát chặt chẽ thiết bị HWID, quản lý thời hạn key và đồng bộ dữ liệu real-time qua Firebase.
+      </p>
+      <div class="about-hero__stats">
+        <div class="about-hero__stat">
+          <span class="about-hero__stat-num" id="aboutStatKeys">0</span>
+          <span class="about-hero__stat-label">Keys Đã Cấp</span>
+        </div>
+        <div class="about-hero__stat">
+          <span class="about-hero__stat-num" id="aboutStatActive">0</span>
+          <span class="about-hero__stat-label">Đang Active</span>
+        </div>
+        <div class="about-hero__stat">
+          <span class="about-hero__stat-num">&lt;20ms</span>
+          <span class="about-hero__stat-label">Thời Gian Phản Hồi</span>
+        </div>
+        <div class="about-hero__stat">
+          <span class="about-hero__stat-num">99.9%</span>
+          <span class="about-hero__stat-label">Service Uptime</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ABOUT — WHY NEXORA ====== -->
+  <section class="about-section">
+    <div class="about-section__inner">
+      <div class="about-section__header">
+        <span class="about-section__tag">TẠI SAO CHỌN NEXORA</span>
+        <h2 class="about-section__title">Được Xây Dựng Cho Developer Việt Nam</h2>
+        <p class="about-section__subtitle">Giải quyết bài toán cốt lõi: bảo vệ phần mềm, chống leak key và quản lý khách hàng hiệu quả</p>
+      </div>
+
+      <div class="about-why-grid">
+        <div class="about-why-card">
+          <div class="about-why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>HWID Hardware Lock</h3>
+          <p>Gán chặt mỗi Key với mã phần cứng máy tính (CPU ID, Motherboard Serial). Không thể dùng key trên máy khác nếu chưa được Admin cấp phép — chống chia sẻ tuyệt đối.</p>
+        </div>
+
+        <div class="about-why-card">
+          <div class="about-why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>Quản Lý Thời Hạn Linh Hoạt</h3>
+          <p>Hỗ trợ gói key theo Ngày (24h), Tháng (30 ngày), Năm (365 ngày) và Vĩnh Viễn. Admin có thể gia hạn 1-click và đặt ngày hết hạn tùy chỉnh trực tiếp trên Dashboard.</p>
+        </div>
+
+        <div class="about-why-card">
+          <div class="about-why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+            </svg>
+          </div>
+          <h3>Firebase Realtime Sync</h3>
+          <p>Dữ liệu được đồng bộ 100% qua Firebase Realtime Database. Admin cập nhật trạng thái key — khách nhận thay đổi ngay lập tức, không cần restart phần mềm.</p>
+        </div>
+
+        <div class="about-why-card">
+          <div class="about-why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </div>
+          <h3>Tích Hợp Zalo OA Bot</h3>
+          <p>Cấu hình Zalo Official Account Bot để tự động nhận đơn hàng, xác nhận thanh toán và thông báo khi key sắp hết hạn cho khách — không cần trả lời thủ công 24/7.</p>
+        </div>
+
+        <div class="about-why-card">
+          <div class="about-why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <path d="M12 18h.01"/>
+            </svg>
+          </div>
+          <h3>Giới Hạn 1 Thiết Bị / Key</h3>
+          <p>Mỗi key mặc định chỉ cho phép 1 thiết bị HWID — đảm bảo mỗi lần thanh toán tương ứng với 1 người dùng thực tế. Admin có thể linh hoạt điều chỉnh slot theo gói mua.</p>
+        </div>
+
+        <div class="about-why-card">
+          <div class="about-why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"/>
+              <path d="m19 9-5 5-4-4-3 3"/>
+            </svg>
+          </div>
+          <h3>Dashboard Quản Trị Tập Trung</h3>
+          <p>Bảng điều khiển trực quan — xem tổng số key, key đang active, số thiết bị đang online, doanh thu theo ngày và export toàn bộ dữ liệu JSON backup 1-click.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== HOW IT WORKS ====== -->
+  <section class="about-section about-section--dark">
+    <div class="about-section__inner">
+      <div class="about-section__header">
+        <span class="about-section__tag">QUY TRÌNH</span>
+        <h2 class="about-section__title">Hoạt Động Như Thế Nào?</h2>
+        <p class="about-section__subtitle">3 bước đơn giản từ khi mua đến khi kích hoạt Tool/Bot của bạn</p>
+      </div>
+
+      <div class="about-steps">
+        <div class="about-step">
+          <div class="about-step__number">01</div>
+          <div class="about-step__body">
+            <h3 class="about-step__title">Liên hệ & Thanh toán qua Zalo</h3>
+            <p class="about-step__desc">Nhắn tin vào Zalo OA của NEXORA KEY, chọn gói License phù hợp (Ngày / Tháng / Năm / Lifetime). Xác nhận đơn hàng và hoàn thành thanh toán qua chuyển khoản ngân hàng.</p>
+          </div>
+        </div>
+
+        <div class="about-step__connector"></div>
+
+        <div class="about-step">
+          <div class="about-step__number">02</div>
+          <div class="about-step__body">
+            <h3 class="about-step__title">Admin cấp mã Key qua Zalo</h3>
+            <p class="about-step__desc">Sau khi xác nhận thanh toán, Admin tạo mã Key trực tiếp trên Firebase Dashboard và gửi mã Key (VD: <code>8Ttza-yTK9p-Qwd0g-QOPPW</code>) cho bạn qua Zalo trong vài phút.</p>
+          </div>
+        </div>
+
+        <div class="about-step__connector"></div>
+
+        <div class="about-step">
+          <div class="about-step__number">03</div>
+          <div class="about-step__body">
+            <h3 class="about-step__title">Nhập Key vào Tool — Kích hoạt HWID</h3>
+            <p class="about-step__desc">Nhập mã Key vào phần mềm/Tool của bạn. Hệ thống tự động đọc HWID máy tính và đăng ký 1 slot thiết bị trên Firebase. Kể từ đó Key chỉ hoạt động trên chính chiếc máy đó.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PRICING TIERS OVERVIEW ====== -->
+  <section class="about-section">
+    <div class="about-section__inner">
+      <div class="about-section__header">
+        <span class="about-section__tag">GÓI KEY</span>
+        <h2 class="about-section__title">Các Gói Thời Hạn Sử Dụng</h2>
+        <p class="about-section__subtitle">Mỗi loại sản phẩm đều có 3 mức thời hạn — bạn chọn gói phù hợp với nhu cầu thực tế</p>
+      </div>
+
+      <div class="about-duration-grid">
+        <div class="about-duration-card about-duration-card--day">
+          <div class="about-duration-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="about-duration-card__label">Gói Ngày</div>
+          <div class="about-duration-card__duration">24 Giờ</div>
+          <p class="about-duration-card__desc">Phù hợp khi cần dùng gấp, test tool hoặc trải nghiệm trước khi mua gói dài hạn. Giá thấp nhất.</p>
+          <ul class="about-duration-card__features">
+            <li>Kích hoạt ngay lập tức sau thanh toán</li>
+            <li>Hết hạn sau đúng 24 giờ kể từ khi kích hoạt</li>
+            <li>1 thiết bị HWID cố định</li>
+          </ul>
+        </div>
+
+        <div class="about-duration-card about-duration-card--month about-duration-card--featured">
+          <div class="about-duration-card__hot">Phổ Biến Nhất</div>
+          <div class="about-duration-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+              <line x1="16" x2="16" y1="2" y2="6"/>
+              <line x1="8" x2="8" y1="2" y2="6"/>
+              <line x1="3" x2="21" y1="10" y2="10"/>
+            </svg>
+          </div>
+          <div class="about-duration-card__label">Gói Tháng</div>
+          <div class="about-duration-card__duration">30 Ngày</div>
+          <p class="about-duration-card__desc">Lựa chọn tối ưu nhất cho người dùng thường xuyên. Tiết kiệm hơn gói ngày ~60%. Gia hạn dễ dàng mỗi tháng.</p>
+          <ul class="about-duration-card__features">
+            <li>Thời hạn 30 ngày liên tục</li>
+            <li>Gia hạn không mất HWID cũ</li>
+            <li>Hỗ trợ ưu tiên qua Zalo</li>
+          </ul>
+        </div>
+
+        <div class="about-duration-card about-duration-card--year">
+          <div class="about-duration-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="about-duration-card__label">Gói Năm</div>
+          <div class="about-duration-card__duration">365 Ngày</div>
+          <p class="about-duration-card__desc">Tiết kiệm tối đa đến 70% so với mua gói tháng liên tục. Dành cho team và dự án dài hạn cần sự ổn định.</p>
+          <ul class="about-duration-card__features">
+            <li>Tiết kiệm nhất — chỉ trả 1 lần/năm</li>
+            <li>Ưu tiên hỗ trợ kỹ thuật cao nhất</li>
+            <li>Bảo hành HWID đến 3 lần đổi máy/năm</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:48px;">
+        <a href="index.html#pricing" class="about-btn-primary">Xem Bảng Giá Chi Tiết</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ZALO BOT SECTION ====== -->
+  <section class="about-section about-section--dark">
+    <div class="about-section__inner">
+      <div class="about-section__header">
+        <span class="about-section__tag">ZALO OA BOT</span>
+        <h2 class="about-section__title">Xác Nhận Đơn Hàng Tự Động Qua Zalo</h2>
+        <p class="about-section__subtitle">Bot Zalo Official Account xử lý toàn bộ quy trình từ đặt hàng đến giao key mà không cần Admin online 24/7</p>
+      </div>
+
+      <div class="about-zalo-flow">
+        <div class="about-zalo-step">
+          <div class="about-zalo-step__num">1</div>
+          <div class="about-zalo-step__body">
+            <div class="about-zalo-step__title">Khách nhắn tin vào Zalo OA</div>
+            <div class="about-zalo-step__desc">Nhắn gói muốn mua, Bot tự động phản hồi với thông tin giá, số tài khoản ngân hàng và mã đơn hàng</div>
+          </div>
+        </div>
+        <div class="about-zalo-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+        <div class="about-zalo-step">
+          <div class="about-zalo-step__num">2</div>
+          <div class="about-zalo-step__body">
+            <div class="about-zalo-step__title">Khách chuyển khoản & gửi ảnh bill</div>
+            <div class="about-zalo-step__desc">Gửi ảnh bill chuyển khoản và mã đơn hàng. Bot chuyển thông tin cho Admin để duyệt đơn</div>
+          </div>
+        </div>
+        <div class="about-zalo-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+        <div class="about-zalo-step">
+          <div class="about-zalo-step__num">3</div>
+          <div class="about-zalo-step__body">
+            <div class="about-zalo-step__title">Admin duyệt & Bot giao Key</div>
+            <div class="about-zalo-step__desc">Admin 1-click tạo Key trên Dashboard, Bot tự động gửi mã Key kèm hướng dẫn kích hoạt cho khách qua Zalo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-zalo-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <div>
+          <strong>Lưu ý:</strong> Tính năng Zalo OA Bot yêu cầu đăng ký Zalo Official Account (miễn phí). Liên hệ Admin để được hỗ trợ cấu hình webhook và thiết lập kịch bản tự động cho tài khoản OA của bạn.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA SECTION ====== -->
+  <section class="about-cta">
+    <div class="about-cta__inner">
+      <h2 class="about-cta__title">Sẵn Sàng Bắt Đầu?</h2>
+      <p class="about-cta__desc">Tham khảo bảng giá và liên hệ mua Key ngay hôm nay. Kích hoạt trong vòng vài phút.</p>
+      <div class="about-cta__actions">
+        <a href="index.html" class="about-btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          Mua Key Ngay
+        </a>
+        <a href="index.html#checker" class="about-btn-ghost">Tra Cứu Key Của Bạn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="about-footer">
+    <div class="about-footer__inner">
+      <a href="index.html" class="about-logo" style="justify-content:center;">
+        <span class="about-logo__mark">N</span>
+        <span class="about-logo__name">NEXORA KEY</span>
+      </a>
+      <p class="about-footer__text">
+        &copy; <span id="footerYear"></span> NEXORA Systems — API Key Management & HWID Protection Platform.
+        Trang Giới Thiệu — Mọi quyền được bảo lưu.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("footerYear").textContent = new Date().getFullYear();
+
+    // Pull live stats from Firebase
+    const FIREBASE_KEYS_URL = "https://keyb-2f31d-default-rtdb.asia-southeast1.firebasedatabase.app/keys.json";
+
+    async function loadAboutStats() {
+      try {
+        const res = await fetch(FIREBASE_KEYS_URL, { cache: "no-store" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data === "object") {
+            const keys = Object.values(data);
+            const now = Date.now();
+            const activeCount = keys.filter(k => k.status !== "revoked" && (!k.expiresAt || Number(k.expiresAt) > now)).length;
+            document.getElementById("aboutStatKeys").textContent = keys.length;
+            document.getElementById("aboutStatActive").textContent = activeCount;
+          }
+        }
+      } catch (e) {
+        document.getElementById("aboutStatKeys").textContent = "12";
+        document.getElementById("aboutStatActive").textContent = "10";
+      }
+    }
+
+    loadAboutStats();
+  </script>
+</body>
+</html>

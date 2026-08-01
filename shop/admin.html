@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXORA — Admin Management Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css?v=8">
+  <script>
+    // Security Auth Guard
+    if (localStorage.getItem("nexora_remember_session") !== "1" && sessionStorage.getItem("nexora_admin_session") !== "1") {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ====== ADMIN DASHBOARD SHELL ====== -->
+  <div class="admin-shell" id="adminScreen">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__brand-mark">N</div>
+        <div>
+          <div class="sidebar__brand-text">NEXORA</div>
+          <div class="sidebar__brand-sub">Admin Management</div>
+        </div>
+      </div>
+
+      <div class="sidebar__nav">
+        <a href="#" class="nav-item nav-item--active" id="navKeys">
+          <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          Quản Lý Key & Thời Hạn
+        </a>
+        <a href="#" class="nav-item" id="navProducts">
+          <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          Gói License & Giá Bán
+        </a>
+        <a href="index.html" class="nav-item" target="_blank">
+          <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+          Trang Khách Xem ↗
+        </a>
+      </div>
+
+      <div class="sidebar__footer">
+        <a href="#" class="nav-item nav-item--danger" id="logoutBtn">
+          <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+          Đăng xuất
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-content">
+      <div class="topbar">
+        <div>
+          <h1 class="topbar__title" id="pageTitle">Quản Lý Key & Thời Hạn License</h1>
+          <div class="topbar__subtitle" id="pageSubtitle">Cấu hình thời gian hết hạn (Ngày/Tháng/Năm), kích hoạt & gỡ HWID thiết bị</div>
+        </div>
+        <div class="topbar__actions">
+          <span class="firebase-badge">
+            <span class="firebase-badge__dot"></span>
+            Firebase Realtime Active
+          </span>
+          <button class="btn-admin btn-admin--ghost" id="reloadBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+            Tải Lại
+          </button>
+          <button class="btn-admin btn-admin--primary" id="exportBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Xuất JSON Backup
+          </button>
+        </div>
+      </div>
+
+      <main>
+        <!-- Statistics Bar -->
+        <div class="stat-grid">
+          <div class="stat-card-admin stat-card-admin--cyan">
+            <div class="stat-card-admin__label">Tổng Key Khởi Tạo</div>
+            <div class="stat-card-admin__value" id="statTotalKeys">0</div>
+          </div>
+          <div class="stat-card-admin stat-card-admin--emerald">
+            <div class="stat-card-admin__label">Key Đang Active</div>
+            <div class="stat-card-admin__value" id="statActiveKeys">0</div>
+          </div>
+          <div class="stat-card-admin stat-card-admin--amber">
+            <div class="stat-card-admin__label">Key Đã Hết Hạn</div>
+            <div class="stat-card-admin__value" id="statExpiredKeys">0</div>
+          </div>
+          <div class="stat-card-admin">
+            <div class="stat-card-admin__label">Thiết Bị HWID Đã Gán</div>
+            <div class="stat-card-admin__value" id="statHwidDevices">0</div>
+          </div>
+        </div>
+
+        <!-- Panel 1: Key & Expiration Management (Primary Task) -->
+        <div id="panelKeys">
+          <div class="admin-grid">
+            <!-- Form Tạo / Gia Hạn Key -->
+            <section class="panel">
+              <h2 class="panel__title" id="keyFormTitle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                Khởi Tạo / Cấu Hình Key
+              </h2>
+              <form id="keyForm">
+                <input type="hidden" id="kEditId">
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="kKey">Mã Key (Node ID / Key Code)</label>
+                  <div style="display:flex;gap:8px;">
+                    <input class="admin-field__input" type="text" id="kKey" placeholder="VD: 8Ttza-yTK9p-Qwd0g-QOPPW..." style="flex:1;font-family:var(--font-mono);">
+                    <button type="button" class="btn-admin btn-admin--ghost" id="genKeyBtn">Sinh Key</button>
+                  </div>
+                </div>
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="kPackage">Gắn Gói License</label>
+                  <select class="admin-field__select" id="kPackage"></select>
+                </div>
+
+                <!-- Package Duration Preset Select (Ngày / Tháng / Năm / Custom) -->
+                <div class="admin-field">
+                  <label class="admin-field__label" for="kDurationPreset">Chọn Gói Thời Hạn</label>
+                  <select class="admin-field__select" id="kDurationPreset">
+                    <option value="1">Gói Ngày (24 Giờ)</option>
+                    <option value="7">Gói 7 Ngày (1 Tuần)</option>
+                    <option value="30" selected>Gói Tháng (30 Ngày)</option>
+                    <option value="90">Gói Quý (90 Ngày)</option>
+                    <option value="365">Gói Năm (365 Ngày)</option>
+                    <option value="0">Gói Vĩnh Viễn (Lifetime)</option>
+                    <option value="custom">Tuỳ chọn Ngày Hết Hạn Cụ Thể</option>
+                  </select>
+                </div>
+
+                <div class="admin-field" id="customDateWrap" style="display:none;">
+                  <label class="admin-field__label" for="kCustomExpiryDate">Chọn Ngày Hết Hạn Cụ Thể</label>
+                  <input class="admin-field__input" type="date" id="kCustomExpiryDate">
+                </div>
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="kMaxDevices">Số Thiết Bị HWID Cho Phép</label>
+                  <input class="admin-field__input" type="number" id="kMaxDevices" value="1" min="1">
+                </div>
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="kNote">Ghi Chú Khách / Đơn Hàng</label>
+                  <input class="admin-field__input" type="text" id="kNote" placeholder="Khách Zalo #102, Đơn hàng VIP...">
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn-admin btn-admin--primary" style="flex:1;">Lưu Key Lên Firebase</button>
+                  <button type="button" class="btn-admin btn-admin--ghost" id="resetKeyFormBtn">Huỷ</button>
+                </div>
+              </form>
+            </section>
+
+            <!-- Table Key Firebase & Trạng Thái Hết Hạn -->
+            <section class="panel">
+              <div class="panel-toolbar">
+                <h2 class="panel__title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+                  Danh Sách Keys Trên Firebase Realtime DB <span class="badge-count" id="firebaseKeyCount">0</span>
+                </h2>
+                <div style="display:flex;gap:10px;margin-top:10px;">
+                  <input class="panel-search" type="text" id="keySearch" placeholder="🔍 Tìm mã key (8Ttza-yTK...), ghi chú..." style="flex:1;margin-top:0;">
+                  <select id="keyFilterStatus" style="padding:9px 12px;border-radius:var(--radius-md);background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text);font-size:var(--text-xs);">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="active">Active</option>
+                    <option value="expired">Expired (Hết hạn)</option>
+                    <option value="revoked">Revoked (Thu hồi)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="overflow-x:auto;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Node Key ID</th>
+                      <th>Gói License</th>
+                      <th>HWID Devices</th>
+                      <th>Thời Gian Hết Hạn</th>
+                      <th>Trạng Thái</th>
+                      <th>Thao Tác Admin</th>
+                    </tr>
+                  </thead>
+                  <tbody id="firebaseKeyTableBody"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Panel 2: Product & Package Pricing -->
+        <div id="panelProducts" style="display:none;">
+          <div class="admin-grid">
+            <section class="panel">
+              <h2 class="panel__title" id="formTitle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                Thêm Gói License Mới
+              </h2>
+              <form id="productForm">
+                <input type="hidden" id="pId">
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="pType">Loại Gói License</label>
+                  <select class="admin-field__select" id="pType">
+                    <option value="apikey">API Key (Giá Theo Ngày / Tháng / Năm)</option>
+                    <option value="file">File Download (Source Code / Tool)</option>
+                  </select>
+                </div>
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="pName">Tên Gói Sản Phẩm</label>
+                  <input class="admin-field__input" type="text" id="pName" placeholder="VD: NEXORA Login API Key — VIP1" required>
+                </div>
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="pCategory">Danh Mục</label>
+                  <input class="admin-field__input" type="text" id="pCategory" placeholder="API Login, Tool Game, Source Code..." required>
+                </div>
+
+                <div class="admin-field">
+                  <label class="admin-field__label">Cấu Hình Giá Theo Thời Gian (VNĐ)</label>
+                  <div class="price-grid">
+                    <div>
+                      <label class="price-grid__label">Giá 1 Ngày (24h)</label>
+                      <input class="price-grid__input" type="number" id="pPriceDay" value="10000">
+                    </div>
+                    <div>
+                      <label class="price-grid__label">Giá 1 Tháng (30d)</label>
+                      <input class="price-grid__input" type="number" id="pPriceMonth" value="150000">
+                    </div>
+                    <div>
+                      <label class="price-grid__label">Giá 1 Năm (365d)</label>
+                      <input class="price-grid__input" type="number" id="pPriceYear" value="1200000">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="pImage">Hình Ảnh URL</label>
+                  <input class="admin-field__input" type="url" id="pImage" placeholder="https://..." required>
+                </div>
+
+                <div class="admin-field">
+                  <label class="admin-field__label" for="pDesc">Mô Tả Gói (Mỗi dòng 1 tính năng)</label>
+                  <textarea class="admin-field__textarea" id="pDesc" rows="3" placeholder="Token OAuth 15ms latency&#10;Gán tối đa 2 thiết bị HWID..."></textarea>
+                </div>
+
+                <div class="admin-field" style="display:flex;align-items:center;gap:8px;">
+                  <input type="checkbox" id="pFeatured" style="width:auto;accent-color:var(--color-amber);">
+                  <label for="pFeatured" style="margin:0;font-size:var(--text-sm);color:var(--color-text-muted);">Gắn Nhãn Gói VIP Nổi Bật</label>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn-admin btn-admin--primary" style="flex:1;">Lưu Gói Sản Phẩm</button>
+                  <button type="button" class="btn-admin btn-admin--ghost" id="resetFormBtn">Huỷ</button>
+                </div>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="panel-toolbar">
+                <h2 class="panel__title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                  Danh Sách Gói License <span class="badge-count" id="productCount">0</span>
+                </h2>
+              </div>
+
+              <div style="overflow-x:auto;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Ảnh</th>
+                      <th>Tên Gói</th>
+                      <th>Loại</th>
+                      <th>Giá Theo Thời Gian (Ngày/Tháng/Năm)</th>
+                      <th>Thao Tác</th>
+                    </tr>
+                  </thead>
+                  <tbody id="productTableBody"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div id="adminToast"></div>
+  <script src="js/admin.js?v=9"></script>
+</body>
+</html>
