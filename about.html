@@ -35,7 +35,7 @@
         <a href="about.html" class="about-nav__link about-nav__link--active">Giới Thiệu</a>
         <a href="index.html#pricing" class="about-nav__link">Bảng Giá</a>
         <a href="index.html#checker" class="about-nav__link">Tra Cứu Key</a>
-        <a href="login.html" class="about-nav__link">Đăng Nhập</a>
+        <div id="aboutHeaderUser" class="about-header-user"></div>
         <a href="index.html" class="about-btn-cta">Mua Key Ngay</a>
       </nav>
     </div>
@@ -378,6 +378,40 @@
     }
 
     loadAboutStats();
+
+    function getLoggedInCustomer() {
+      return localStorage.getItem("nexora_customer_user") || sessionStorage.getItem("nexora_customer_user") || "";
+    }
+
+    function renderAboutHeaderUser() {
+      const container = document.getElementById("aboutHeaderUser");
+      if (!container) return;
+      const user = getLoggedInCustomer();
+      if (user) {
+        container.innerHTML = `
+          <div class="about-header-user">
+            <span class="about-header-user__name">Xin chào, <strong>${user}</strong></span>
+            <button id="aboutLogoutBtn" class="about-header-user__logout" type="button" title="Đăng xuất">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+          </div>
+        `;
+        const logoutBtn = document.getElementById("aboutLogoutBtn");
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", () => {
+            sessionStorage.removeItem("nexora_customer_session");
+            localStorage.removeItem("nexora_customer_remember");
+            sessionStorage.removeItem("nexora_customer_user");
+            localStorage.removeItem("nexora_customer_user");
+            window.location.reload();
+          });
+        }
+      } else {
+        container.innerHTML = `<a href="login.html" class="about-nav__link">Đăng Nhập</a>`;
+      }
+    }
+
+    renderAboutHeaderUser();
   </script>
 </body>
 </html>
