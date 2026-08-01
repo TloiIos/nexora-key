@@ -26,9 +26,9 @@
 // ============================================================================
 
 const CONFIG = {
-  shopName:   "NEXORA KEY",
+  shopName:   "Lợi",
   zaloPhone:  "0900000000",                   // ← Thay số Zalo thật vào đây
-  zaloOaName: "NEXORA KEY SYSTEM",
+  zaloOaName: "Lợi SYSTEM",
 
   firebase: {
     packages: "https://keyb-2f31d-default-rtdb.asia-southeast1.firebasedatabase.app/packages.json",
@@ -89,7 +89,7 @@ async function loadPackages() {
       }
     }
   } catch (err) {
-    console.warn("[NEXORA] packages fetch failed:", err.message);
+    console.warn("[Lợi] packages fetch failed:", err.message);
   }
 
   // Try localStorage cache
@@ -102,7 +102,7 @@ async function loadPackages() {
   state.packages = [
     {
       id:           "-OyHMOsX_XVD2K1bLjdt",
-      name:         "NEXORA Login API Key — VIP1",
+      name:         "Lợi Login API Key — VIP1",
       type:         "apikey",
       category:     "API Login",
       priceDay:     10000,
