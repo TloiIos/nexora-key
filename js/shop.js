@@ -668,6 +668,42 @@ function setFooterYear() {
   if (el) el.textContent = new Date().getFullYear();
 }
 
+function getLoggedInCustomer() {
+  return localStorage.getItem("nexora_customer_user") || sessionStorage.getItem("nexora_customer_user") || "";
+}
+
+function isCustomerLoggedIn() {
+  return Boolean(getLoggedInCustomer());
+}
+
+function renderHeaderUser() {
+  const container = document.getElementById("headerUser");
+  if (!container) return;
+
+  const user = getLoggedInCustomer();
+  if (user) {
+    container.innerHTML = `
+      <div class="header-user__badge">
+        <span class="header-user__name">Xin chào, <strong>${user}</strong></span>
+        <button id="logoutUserBtn" class="header-user__logout" type="button" title="Đăng xuất">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    `;
+    const logoutBtn = document.getElementById("logoutUserBtn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        sessionStorage.removeItem("nexora_customer_session");
+        localStorage.removeItem("nexora_customer_remember");
+        sessionStorage.removeItem("nexora_customer_user");
+        localStorage.removeItem("nexora_customer_user");
+        window.location.reload();
+      });
+    }
+  } else {
+    container.innerHTML = `<a href="login.html" class="btn btn--primary btn--sm">Đăng Nhập</a>`;
+  }
+}
 
 // ============================================================================
 // ENTRY POINT
@@ -675,6 +711,7 @@ function setFooterYear() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   setFooterYear();
+  renderHeaderUser();
 
   // Parallel load both Firebase sources
   await Promise.all([loadPackages(), loadKeys()]);
