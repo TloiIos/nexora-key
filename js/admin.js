@@ -507,7 +507,7 @@ async function lockSpecificUid(keyId, uid) {
     return;
   }
 
-  const reason = prompt(`Khóa UID ${uid} trên Key ${key.key || key.id}\\nNhập lý do hoặc để trống:`);
+  const reason = prompt(`Khóa UID ${uid} trên Key ${key.key || key.id}\nNhập lý do hoặc để trống:`);
   if (reason === null) return;
 
   key.lockedUids[uid] = {
