@@ -9,6 +9,8 @@ const AUTH_CONFIG = {
   defaultPassword: "admin123",
   sessionKey: "nexora_admin_session",
   rememberKey: "nexora_remember_session",
+  customerSessionKey: "nexora_customer_session",
+  customerRememberKey: "nexora_customer_remember",
   usersRegistryKey: "nexora_users_registry_v8"
 };
 
@@ -20,12 +22,6 @@ const ICONS = {
 document.addEventListener("DOMContentLoaded", initAuth);
 
 function initAuth() {
-  // Auto-redirect if already authenticated
-  if (localStorage.getItem(AUTH_CONFIG.rememberKey) === "1" || sessionStorage.getItem(AUTH_CONFIG.sessionKey) === "1") {
-    window.location.href = "admin.html";
-    return;
-  }
-
   initTabs();
   initPasswordToggle();
   initLoginForm();
@@ -103,9 +99,10 @@ function initLoginForm() {
     const errorEl = document.getElementById("loginError");
 
     const registry = getUsersRegistry();
-    const match = registry.find(user => user.username.toLowerCase() === u.toLowerCase() && user.password === p);
+    const user = registry.find(user => user.username.toLowerCase() === u.toLowerCase() && user.password === p);
+    const isAdminFallback = u === AUTH_CONFIG.defaultUser && p === AUTH_CONFIG.defaultPassword;
 
-    if (match || (u === AUTH_CONFIG.defaultUser && p === AUTH_CONFIG.defaultPassword)) {
+    if (isAdminFallback) {
       if (remember) {
         localStorage.setItem(AUTH_CONFIG.rememberKey, "1");
         localStorage.setItem("nexora_active_user", u);
@@ -113,9 +110,21 @@ function initLoginForm() {
         sessionStorage.setItem(AUTH_CONFIG.sessionKey, "1");
         sessionStorage.setItem("nexora_active_user", u);
       }
-      toast("Đăng nhập thành công! Đang chuyển hướng...");
+      toast("Đăng nhập admin thành công! Đang chuyển hướng...");
       setTimeout(() => {
         window.location.href = "admin.html";
+      }, 600);
+    } else if (user) {
+      if (remember) {
+        localStorage.setItem(AUTH_CONFIG.customerRememberKey, "1");
+        localStorage.setItem("nexora_customer_user", u);
+      } else {
+        sessionStorage.setItem(AUTH_CONFIG.customerSessionKey, "1");
+        sessionStorage.setItem("nexora_customer_user", u);
+      }
+      toast("Đăng nhập khách hàng thành công!" );
+      setTimeout(() => {
+        window.location.href = "index.html";
       }, 600);
     } else {
       if (errorEl) errorEl.textContent = "Tài khoản hoặc mật khẩu không chính xác!";
@@ -159,17 +168,18 @@ function initRegisterForm() {
       return;
     }
 
-    registry.push({ username: u, password: p, email: email, registeredAt: new Date().toISOString() });
+    registry.push({ username: u, password: p, email: email, role: "Customer", registeredAt: new Date().toISOString() });
     localStorage.setItem(AUTH_CONFIG.usersRegistryKey, JSON.stringify(registry));
 
-    if (successEl) successEl.textContent = "Đăng ký thành công! Vui lòng chuyển sang tab Đăng Nhập.";
-    toast("Tạo tài khoản admin thành công!");
+    // Auto-login the newly registered customer (session only)
+    sessionStorage.setItem(AUTH_CONFIG.customerSessionKey, "1");
+    sessionStorage.setItem("nexora_customer_user", u);
 
+    if (successEl) successEl.textContent = "Đăng ký thành công — Đang đăng nhập...";
+    toast("Đăng ký thành công! Đang chuyển đến trang khách...");
     setTimeout(() => {
-      document.getElementById("tabLoginBtn").click();
-      document.getElementById("loginUser").value = u;
-      document.getElementById("loginPw").value = p;
-    }, 1200);
+      window.location.href = "index.html";
+    }, 700);
   });
 }
 
