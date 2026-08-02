@@ -83,61 +83,79 @@
         </div>
       </div>
 
-      <!-- 3D Astronaut Illustration -->
+      <!-- 3D Astronaut Illustration (SVG) -->
       <div class="hero__astronaut">
         <div class="astronaut__ambient"></div>
         <div class="astronaut__orbit"></div>
         <div class="astronaut__orbit astronaut__orbit--inner"></div>
 
         <svg class="astronaut__figure" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="suitGrad" cx="0.5" cy="0.4" r="0.6">
+              <stop offset="0%" stop-color="hsl(228,36%,22%)" />
+              <stop offset="100%" stop-color="hsl(228,36%,14%)" />
+            </radialGradient>
+            <linearGradient id="visorGrad" x1="198" y1="140" x2="302" y2="230" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7fd3ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#2b9fff" stop-opacity="0.6"/>
+            </linearGradient>
+          </defs>
+
           <!-- Body suit -->
-          <ellipse cx="250" cy="280" rx="95" ry="110" fill="url(#suitGrad)" stroke="hsl(228,38%,22%)"
-            stroke-width="3" />
+          <ellipse cx="250" cy="280" rx="95" ry="110" fill="url(#suitGrad)" stroke="hsl(228,38%,22%)" stroke-width="3" />
           <!-- Suit detail lines -->
-          <path d="M195 240 C210 320, 290 320, 305 240" stroke="hsl(228,30%,28%)" stroke-width="2" fill="none"
-            opacity="0.6" />
+          <path d="M195 240 C210 320, 290 320, 305 240" stroke="hsl(228,30%,28%)" stroke-width="2" fill="none" opacity="0.6" />
           <line x1="250" y1="200" x2="250" y2="380" stroke="hsl(228,30%,28%)" stroke-width="1.5" opacity="0.4" />
           <!-- Suit chest panel -->
-          <rect x="225" y="260" width="50" height="35" rx="6" fill="hsl(228,36%,14%)" stroke="hsl(192,100%,50%)"
-            stroke-width="1" opacity="0.5" />
+          <rect x="225" y="260" width="50" height="35" rx="6" fill="hsl(228,36%,14%)" stroke="hsl(192,100%,50%)" stroke-width="1" opacity="0.5" />
           <circle cx="240" cy="275" r="3" fill="hsl(160,84%,39%)" opacity="0.8" />
           <circle cx="255" cy="275" r="3" fill="hsl(192,100%,50%)" opacity="0.8" />
           <rect x="232" y="283" width="36" height="2" rx="1" fill="hsl(228,30%,30%)" opacity="0.5" />
           <rect x="236" y="288" width="28" height="2" rx="1" fill="hsl(228,30%,30%)" opacity="0.3" />
           <!-- Backpack -->
-          <rect x="155" y="230" width="30" height="80" rx="10" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)"
-            stroke-width="2" />
-          <rect x="315" y="230" width="30" height="80" rx="10" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)"
-            stroke-width="2" />
+          <rect x="155" y="230" width="30" height="80" rx="10" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)" stroke-width="2" />
+          <rect x="315" y="230" width="30" height="80" rx="10" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)" stroke-width="2" />
           <!-- Helmet -->
           <circle cx="250" cy="185" r="72" fill="hsl(228,38%,14%)" stroke="hsl(228,30%,28%)" stroke-width="4" />
           <circle cx="250" cy="185" r="76" fill="none" stroke="hsl(228,36%,20%)" stroke-width="2" opacity="0.5" />
           <!-- Visor -->
-          <ellipse cx="250" cy="185" rx="52" ry="46" fill="url(#visorGrad)" stroke="hsl(192,100%,42%)"
-            stroke-width="3" />
+          <ellipse cx="250" cy="185" rx="52" ry="46" fill="url(#visorGrad)" stroke="hsl(192,100%,42%)" stroke-width="3" />
           <!-- Visor reflections -->
           <ellipse cx="232" cy="170" rx="14" ry="10" fill="hsla(0,0%,100%,0.2)" transform="rotate(-15 232 170)" />
           <ellipse cx="224" cy="178" rx="6" ry="4" fill="hsla(0,0%,100%,0.1)" transform="rotate(-15 224 178)" />
           <!-- Helmet rim -->
           <path d="M198 185 A52 52 0 0 1 302 185" fill="none" stroke="hsl(228,30%,30%)" stroke-width="3" />
           <!-- Arms -->
-          <path d="M155 270 C120 260, 100 300, 115 340" stroke="hsl(228,38%,18%)" stroke-width="24"
-            stroke-linecap="round" fill="none" />
-          <path d="M345 270 C380 260, 400 300, 385 340" stroke="hsl(228,38%,18%)" stroke-width="24"
-            stroke-linecap="round" fill="none" />
+          <path d="M155 270 C120 260, 100 300, 115 340" stroke="hsl(228,38%,18%)" stroke-width="24" stroke-linecap="round" fill="none" />
+          <path d="M345 270 C380 260, 400 300, 385 340" stroke="hsl(228,38%,18%)" stroke-width="24" stroke-linecap="round" fill="none" />
           <!-- Gloves -->
           <circle cx="115" cy="345" r="14" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)" stroke-width="2" />
           <circle cx="385" cy="345" r="14" fill="hsl(228,36%,16%)" stroke="hsl(228,30%,24%)" stroke-width="2" />
-          <!-- 3D Astronaut Illustration (Three.js canvas replaces SVG) -->
-          <div class="hero__astronaut">
-            <div class="astronaut__ambient"></div>
-            <div class="astronaut__orbit"></div>
-            <div class="astronaut__orbit astronaut__orbit--inner"></div>
-
-            <div id="astronautCanvas" style="width:360px;height:360px;border-radius:12px;overflow:hidden;background:transparent;">
-              <!-- Canvas injected by js/astronaut.js -->
-            </div>
+          <!-- Legs -->
+          <path d="M215 370 C210 410, 195 440, 190 460" stroke="hsl(228,38%,18%)" stroke-width="22" stroke-linecap="round" fill="none" />
+          <path d="M285 370 C290 410, 305 440, 310 460" stroke="hsl(228,38%,18%)" stroke-width="22" stroke-linecap="round" fill="none" />
+          <!-- Boots -->
+          <ellipse cx="188" cy="468" rx="18" ry="12" fill="hsl(228,36%,14%)" stroke="hsl(228,30%,22%)" stroke-width="2" />
+          <ellipse cx="312" cy="468" rx="18" ry="12" fill="hsl(228,36%,14%)" stroke="hsl(228,30%,22%)" stroke-width="2" />
+          <!-- Antenna -->
+          <line x1="250" y1="113" x2="250" y2="90" stroke="hsl(228,30%,28%)" stroke-width="2" />
+          <circle cx="250" cy="86" r="5" fill="hsl(192,100%,50%)" opacity="0.9" />
+          <circle cx="250" cy="86" r="8" fill="none" stroke="hsl(192,100%,50%)" stroke-width="1" opacity="0.3" />
+          <!-- Floating particles -->
+          <circle cx="100" cy="150" r="3" fill="hsl(252,100%,68%)" opacity="0.6" />
+          <circle cx="400" cy="200" r="2" fill="hsl(192,100%,50%)" opacity="0.5" />
+          <circle cx="380" cy="400" r="2.5" fill="hsl(160,84%,39%)" opacity="0.4">
+            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="3.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="120" cy="380" r="1.5" fill="hsl(38,92%,50%)" opacity="0.5">
+            <animate attributeName="opacity" values="0.5;0.15;0.5" dur="2.8s" repeatCount="indefinite" />
+          </circle>
+        </svg>
+      </div>
+    </div>
+  </section>
   <!-- ====== STATS BAR ====== -->
+
   <div class="stats-bar">
     <div class="stats-bar__grid">
       <div class="stat-card">
@@ -711,8 +729,6 @@ bool ValidateNexoraKey(const std::string& keyId, const std::string& hwid) {
 
   <div class="toast" id="toast"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
-  <script src="js/astronaut.js"></script>
   <script src="js/shop.js?v=10"></script>
 </body>
 
