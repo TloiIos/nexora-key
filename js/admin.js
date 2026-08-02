@@ -457,7 +457,7 @@ function renderUIDTable() {
   if (countEl) countEl.textContent = list.length.toString();
 
   if (!list.length) {
-    body.innerHTML = `<tr><td colspan="5" class="data-table__empty">Không có UID nào phù hợp.</td></tr>`;
+    body.innerHTML = `<tr><td colspan="6" class="data-table__empty">Không có UID nào phù hợp.</td></tr>`;
   } else {
     body.innerHTML = list.map(item => {
       const lastSeenText = item.lastSeen ? formatTimestamp(item.lastSeen) : "Chưa rõ";
@@ -470,6 +470,7 @@ function renderUIDTable() {
 
       return `
       <tr>
+        <td><img class="uid-avatar" src="https://picsum.photos/seed/${encodeURIComponent(item.uid)}/72/72" alt="" loading="lazy" onerror="this.style.visibility='hidden'"></td>
         <td class="data-table__mono">${item.uid}</td>
         <td class="data-table__muted">${item.keyString}</td>
         <td>${statusTag}</td>
