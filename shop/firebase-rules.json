@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "packages": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "keys": {
+      ".read": true,
+      ".write": "auth != null",
+      "$keyId": {
+        ".validate": "newData.hasChildren(['key'])"
+      }
+    },
+    ".read": false,
+    ".write": false
+  }
+}

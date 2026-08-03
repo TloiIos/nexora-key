@@ -1,0 +1,503 @@
+/* ============================================================================
+   NEXORA KEY — Polish Layer
+   Version: 1.0.0
+
+   Lop tinh chinh giao dien, nap SAU style.css nen se ghi de khi trung.
+   Muc dich: nang cao chieu sau, chuyen dong va do tinh te — khong doi layout.
+
+   Muc luc:
+   1.  Nen & khong khi
+   2.  Typography tinh chinh
+   3.  Nut bam
+   4.  The gia (pkg-card)
+   5.  The thong ke & tinh nang
+   6.  Cong cu check key
+   7.  FAQ
+   8.  Header
+   9.  Hieu ung xuat hien khi cuon
+   10. Thanh cuon & tieu chi truy cap
+   11. Giam chuyen dong
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. NEN & KHONG KHI
+   ============================================================================ */
+
+/* Lam sau nen bang mot lop sang toa nhe tu tren xuong */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(90rem 50rem at 50% -20%, hsla(252, 100%, 68%, 0.09), transparent 60%),
+    radial-gradient(70rem 40rem at 85% 8%, hsla(192, 100%, 50%, 0.06), transparent 55%);
+}
+
+/* Cho noi dung noi len tren lop nen */
+.site-header,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Vien phan cach mo dan giua cac section */
+.section + .section {
+  position: relative;
+}
+
+.section + .section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, 88%);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(0, 0%, 100%, 0.09) 20%,
+    hsla(192, 100%, 50%, 0.22) 50%,
+    hsla(0, 0%, 100%, 0.09) 80%,
+    transparent
+  );
+}
+
+
+/* ============================================================================
+   2. TYPOGRAPHY TINH CHINH
+   ============================================================================ */
+
+/* Tieu de sac net hon, chu it bi gian */
+.section__title,
+.hero__heading {
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+/* Doan mo ta khong bi mo coi dong cuoi */
+.section__subtitle,
+.hero__description {
+  text-wrap: pretty;
+}
+
+/* Tag section co vien va nen nhe cho ro rang */
+.section__tag {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background: hsla(192, 100%, 50%, 0.08);
+  border: 1px solid hsla(192, 100%, 50%, 0.22);
+  backdrop-filter: blur(8px);
+}
+
+/* Chu gradient chuyen mau cham, tao cam giac song */
+.hero__heading-accent {
+  background-size: 220% auto;
+  animation: gradientDrift 9s ease-in-out infinite;
+}
+
+@keyframes gradientDrift {
+  0%, 100% { background-position: 0% center; }
+  50%      { background-position: 100% center; }
+}
+
+
+/* ============================================================================
+   3. NUT BAM
+   ============================================================================ */
+
+/* Hieu ung anh sang quet ngang khi di chuot */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    hsla(0, 0%, 100%, 0.16) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-out);
+}
+
+.btn:hover::after {
+  transform: translateX(120%);
+}
+
+/* Nut chinh nhan len ro hon khi hover */
+.btn--primary:hover {
+  box-shadow:
+    0 10px 30px hsla(192, 100%, 50%, 0.32),
+    0 0 0 1px hsla(192, 100%, 50%, 0.45) inset;
+}
+
+/* Phan hoi khi nhan xuong */
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+
+/* ============================================================================
+   4. THE GIA (PKG-CARD)
+   ============================================================================ */
+
+.pkg-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 420ms var(--ease-out),
+    border-color 300ms ease,
+    box-shadow 420ms var(--ease-out);
+}
+
+/* Vet sang lan theo khi hover */
+.pkg-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    28rem 20rem at 50% 0%,
+    hsla(192, 100%, 50%, 0.13),
+    transparent 70%
+  );
+  transition: opacity 420ms ease;
+}
+
+.pkg-card:hover::after {
+  opacity: 1;
+}
+
+.pkg-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 24px 60px hsla(230, 60%, 2%, 0.6),
+    0 0 0 1px hsla(192, 100%, 50%, 0.28);
+}
+
+/* The noi bat co vien phat sang chay quanh */
+.pkg-card--featured::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    hsla(192, 100%, 50%, 0.55),
+    hsla(252, 100%, 68%, 0.55),
+    hsla(192, 100%, 50%, 0.55)
+  );
+  background-size: 200% 200%;
+  animation: borderFlow 6s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes borderFlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Gia tien noi bat hon */
+.pkg-card__price {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+
+/* ============================================================================
+   5. THE THONG KE & TINH NANG
+   ============================================================================ */
+
+/* So lieu thang hang, khong nhay khi doi gia tri */
+.stat-card__number {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.stat-card {
+  transition:
+    transform 360ms var(--ease-out),
+    border-color 280ms ease,
+    background 280ms ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: hsla(192, 100%, 50%, 0.3);
+}
+
+/* Icon tinh nang xoay nhe va sang len */
+.feature-card {
+  transition:
+    transform 380ms var(--ease-out),
+    border-color 280ms ease,
+    box-shadow 380ms var(--ease-out);
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 44px hsla(230, 60%, 2%, 0.5);
+}
+
+.feature-card__icon {
+  transition:
+    transform 380ms var(--ease-out),
+    box-shadow 380ms ease;
+}
+
+.feature-card:hover .feature-card__icon {
+  transform: scale(1.1) rotate(-6deg);
+  box-shadow: 0 8px 24px hsla(192, 100%, 50%, 0.28);
+}
+
+
+/* ============================================================================
+   6. CONG CU CHECK KEY
+   ============================================================================ */
+
+.checker__card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Anh sang dịu phia tren the */
+.checker__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(192, 100%, 50%, 0.6),
+    transparent
+  );
+}
+
+/* O nhap key ro rang hon khi focus */
+.checker__input {
+  font-variant-ligatures: none;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+}
+
+.checker__input:focus {
+  box-shadow:
+    0 0 0 3px hsla(192, 100%, 50%, 0.14),
+    0 4px 18px hsla(192, 100%, 50%, 0.12);
+}
+
+/* Ket qua tra ve truot vao muot ma */
+.checker__result {
+  animation: resultReveal 420ms var(--ease-out) both;
+}
+
+@keyframes resultReveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================================
+   7. FAQ
+   ============================================================================ */
+
+.faq-item {
+  transition:
+    border-color 260ms ease,
+    background 260ms ease;
+}
+
+.faq-item:hover {
+  border-color: hsla(0, 0%, 100%, 0.16);
+}
+
+.faq-item--active {
+  background: hsla(192, 100%, 50%, 0.04);
+  border-color: hsla(192, 100%, 50%, 0.24);
+}
+
+.faq-item__chevron {
+  transition: transform 320ms var(--ease-out), color 260ms ease;
+}
+
+.faq-item--active .faq-item__chevron {
+  color: var(--color-accent-cyan);
+}
+
+
+/* ============================================================================
+   8. HEADER
+   ============================================================================ */
+
+/* Kinh mo phia sau header cho de doc khi cuon */
+.site-header {
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* Gach chan chay ra tu giua khi hover menu */
+.header-nav__link {
+  position: relative;
+}
+
+.header-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-cyan),
+    var(--color-accent-violet)
+  );
+  transform: translateX(-50%);
+  transition: width 280ms var(--ease-out);
+}
+
+.header-nav__link:hover::after,
+.header-nav__link--active::after {
+  width: 100%;
+}
+
+/* Logo phan hoi nhe khi di chuot */
+.logo__mark {
+  transition: transform 380ms var(--ease-out), box-shadow 380ms ease;
+}
+
+.logo:hover .logo__mark {
+  transform: rotate(-8deg) scale(1.06);
+  box-shadow: 0 8px 22px hsla(192, 100%, 50%, 0.3);
+}
+
+
+/* ============================================================================
+   9. HIEU UNG XUAT HIEN KHI CUON
+   ============================================================================ */
+
+/* Cac phan tu duoc gan .reveal se mo dan khi lot vao khung nhin.
+   shop.js se them class .reveal--visible qua IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 640ms var(--ease-out),
+    transform 640ms var(--ease-out);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Tre dan theo thu tu de tao hieu ung bac thang */
+.reveal:nth-child(2) { transition-delay: 70ms; }
+.reveal:nth-child(3) { transition-delay: 140ms; }
+.reveal:nth-child(4) { transition-delay: 210ms; }
+.reveal:nth-child(5) { transition-delay: 280ms; }
+.reveal:nth-child(6) { transition-delay: 350ms; }
+
+
+/* ============================================================================
+   10. THANH CUON & TIEU CHI TRUY CAP
+   ============================================================================ */
+
+/* Thanh cuon manh va hop tone hon */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: hsla(192, 100%, 50%, 0.35) transparent;
+}
+
+/* Vien focus ro rang cho nguoi dung ban phim */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent-cyan);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Bo outline mac dinh khi bam chuot (van giu cho ban phim) */
+:where(a, button):focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Chua tai xong font thi van giu bo cuc on dinh */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ============================================================================
+   11. GIAM CHUYEN DONG
+   ============================================================================ */
+
+/* Ton trong lua chon cua nguoi dung nhay cam voi chuyen dong */
+@media (prefers-reduced-motion: reduce) {
+  .hero__heading-accent,
+  .pkg-card--featured::before {
+    animation: none;
+  }
+
+  .btn::after {
+    display: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn:active,
+  .pkg-card:hover,
+  .stat-card:hover,
+  .feature-card:hover,
+  .feature-card:hover .feature-card__icon,
+  .logo:hover .logo__mark {
+    transform: none;
+  }
+
+  .checker__result {
+    animation: none;
+  }
+}

@@ -28,6 +28,7 @@ const ICONS = {
   edit: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`,
   delete: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>`,
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>`,
+  lock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`,
   clock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`
 };
 
@@ -187,6 +188,10 @@ async function saveKeysToFirebase() {
         key: item.key || nodeId,
         note: item.note || ""
       };
+
+      if (item.lockedUids && typeof item.lockedUids === 'object') {
+        mapObj[nodeId].lockedUids = item.lockedUids;
+      }
     });
 
     await fetch(ENDPOINTS.keys, {
@@ -201,6 +206,7 @@ async function saveKeysToFirebase() {
 
 function bindNavigation() {
   document.getElementById("navKeys")?.addEventListener("click", e => { e.preventDefault(); switchTab("keys"); });
+  document.getElementById("navUIDs")?.addEventListener("click", e => { e.preventDefault(); switchTab("uids"); });
   document.getElementById("navProducts")?.addEventListener("click", e => { e.preventDefault(); switchTab("products"); });
 
   document.getElementById("reloadBtn")?.addEventListener("click", async () => {
@@ -215,14 +221,18 @@ function bindNavigation() {
 
 function switchTab(tab) {
   const panelKeys = document.getElementById("panelKeys");
+  const panelUIDs = document.getElementById("panelUIDs");
   const panelProducts = document.getElementById("panelProducts");
   const navKeys = document.getElementById("navKeys");
+  const navUIDs = document.getElementById("navUIDs");
   const navProducts = document.getElementById("navProducts");
 
   if (panelKeys) panelKeys.style.display = tab === "keys" ? "block" : "none";
+  if (panelUIDs) panelUIDs.style.display = tab === "uids" ? "block" : "none";
   if (panelProducts) panelProducts.style.display = tab === "products" ? "block" : "none";
 
   if (navKeys) navKeys.classList.toggle("nav-item--active", tab === "keys");
+  if (navUIDs) navUIDs.classList.toggle("nav-item--active", tab === "uids");
   if (navProducts) navProducts.classList.toggle("nav-item--active", tab === "products");
 
   const titleEl = document.getElementById("pageTitle");
@@ -232,6 +242,9 @@ function switchTab(tab) {
     if (tab === "keys") {
       titleEl.textContent = "Quản Lý Key & Thời Hạn License";
       subEl.textContent = "Cấu hình thời gian hết hạn (Ngày/Tháng/Năm), kích hoạt & gỡ HWID thiết bị";
+    } else if (tab === "uids") {
+      titleEl.textContent = "Quản Lý UID Thiết Bị";
+      subEl.textContent = "Xem UID theo key, trạng thái và khóa thiết bị riêng biệt.";
     } else {
       titleEl.textContent = "Gói License & Giá Bán";
       subEl.textContent = "Thiết lập danh mục sản phẩm, gói bán và định giá theo ngày/tháng/năm";
@@ -246,6 +259,7 @@ function switchTab(tab) {
 function renderAllAdminViews() {
   renderStats();
   renderFirebaseKeysTable();
+  renderUIDTable();
   bindKeyForm();
   renderProductsTable();
   bindProductForm();
@@ -336,6 +350,10 @@ function renderFirebaseKeysTable() {
       statusPill = `<span class="stock-pill stock-pill--warning">Expired</span>`;
     }
 
+    const latestUid = (k.devices && typeof k.devices === 'object')
+      ? Object.keys(k.devices).sort((a, b) => (k.devices[a] || 0) - (k.devices[b] || 0)).pop()
+      : "—";
+
     return `
     <tr>
       <td class="data-table__mono">
@@ -344,12 +362,18 @@ function renderFirebaseKeysTable() {
       </td>
       <td class="data-table__muted">${pkg?.name || k.packageId || "—"}</td>
       <td><span class="badge-count">${devCount}/${maxDev} máy</span></td>
+      <td class="data-table__mono" style="font-size:0.85rem;line-height:1.3;">
+        ${latestUid !== "—" ? latestUid : '<span style="color:var(--color-text-dim);">Chưa có</span>'}
+      </td>
       <td style="font-size:var(--text-xs);">${expiresText}</td>
       <td>${statusPill}</td>
       <td>
         <div class="row-actions">
           <button class="row-actions__btn row-actions__btn--edit" data-act="extend-30d" data-id="${k.id}" title="+30 Ngày">
             ${ICONS.clock} +30 ngày
+          </button>
+          <button class="row-actions__btn" data-act="lock-uid" data-id="${k.id}" title="Khóa UID mới nhất">
+            ${ICONS.lock} Khoá UID
           </button>
           <button class="row-actions__btn" data-act="edit-k" data-id="${k.id}">
             ${ICONS.edit} Sửa Hạn
@@ -366,6 +390,8 @@ function renderFirebaseKeysTable() {
     const id = btn.dataset.id;
     btn.addEventListener("click", () => {
       if (btn.dataset.act === "extend-30d") quickExtendKey(id, 30);
+      if (btn.dataset.act === "lock-uid") lockLatestUid(id);
+      if (btn.dataset.act === "revoke-key") revokeKeyNode(id);
       if (btn.dataset.act === "edit-k") editKey(id);
       if (btn.dataset.act === "del-k") deleteKeyNode(id);
     });
@@ -379,6 +405,128 @@ function renderFirebaseKeysTable() {
     statusFilter._bound = true;
     statusFilter.addEventListener("change", renderFirebaseKeysTable);
   }
+}
+
+function renderUIDTable() {
+  const body = document.getElementById("uidTableBody");
+  const countEl = document.getElementById("uidCount");
+  const searchInput = document.getElementById("uidSearch");
+  const statusFilter = document.getElementById("uidFilterStatus");
+
+  if (!body) return;
+
+  const uidEntries = [];
+  state.keysArray.forEach(key => {
+    if (key.devices && typeof key.devices === "object") {
+      Object.entries(key.devices).forEach(([uid, lastSeen]) => {
+        const isLocked = key.lockedUids && key.lockedUids[uid];
+        uidEntries.push({
+          uid,
+          keyId: key.id,
+          keyString: key.key || key.id,
+          keyStatus: key.status || "active",
+          lastSeen: lastSeen || 0,
+          isLocked: !!isLocked,
+          lockInfo: isLocked,
+          parentKey: key
+        });
+      });
+    }
+  });
+
+  const query = (searchInput?.value || "").toLowerCase();
+  let list = uidEntries;
+
+  if (query) {
+    list = list.filter(item =>
+      item.uid.toLowerCase().includes(query) ||
+      item.keyString.toLowerCase().includes(query)
+    );
+  }
+
+  if (statusFilter?.value) {
+    list = list.filter(item => {
+      const keyExpired = item.parentKey.expiresAt && Number(item.parentKey.expiresAt) < Date.now();
+      if (statusFilter.value === "active") return item.keyStatus !== "revoked" && !keyExpired;
+      if (statusFilter.value === "expired") return item.keyStatus !== "revoked" && keyExpired;
+      if (statusFilter.value === "revoked") return item.keyStatus === "revoked";
+      return true;
+    });
+  }
+
+  if (countEl) countEl.textContent = list.length.toString();
+
+  if (!list.length) {
+    body.innerHTML = `<tr><td colspan="6" class="data-table__empty">Không có UID nào phù hợp.</td></tr>`;
+  } else {
+    body.innerHTML = list.map(item => {
+      const lastSeenText = item.lastSeen ? formatTimestamp(item.lastSeen) : "Chưa rõ";
+      const statusTag = item.keyStatus === "revoked"
+        ? `<span class="stock-pill stock-pill--warning" style="color:var(--color-rose);">Revoked</span>`
+        : `<span class="stock-pill">${item.parentKey.expiresAt && Number(item.parentKey.expiresAt) < Date.now() ? "Expired" : "Active"}</span>`;
+      const actionCell = item.isLocked
+        ? `<span class="stock-pill stock-pill--warning" style="color:var(--color-rose);">Đã khóa</span>`
+        : `<button class="row-actions__btn" data-act="lock-uid-row" data-id="${item.keyId}" data-uid="${item.uid}" title="Khóa UID này">${ICONS.lock} Khóa</button>`;
+
+      return `
+      <tr>
+        <td><img class="uid-avatar" src="https://picsum.photos/seed/${encodeURIComponent(item.uid)}/72/72" alt="" loading="lazy" onerror="this.style.visibility='hidden'"></td>
+        <td class="data-table__mono">${item.uid}</td>
+        <td class="data-table__muted">${item.keyString}</td>
+        <td>${statusTag}</td>
+        <td>${lastSeenText}</td>
+        <td>${actionCell}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  body.querySelectorAll("button[data-act='lock-uid-row']").forEach(btn => {
+    const keyId = btn.dataset.id;
+    const uid = btn.dataset.uid;
+    btn.addEventListener("click", async () => {
+      await lockSpecificUid(keyId, uid);
+    });
+  });
+
+  if (searchInput && !searchInput._bound) {
+    searchInput._bound = true;
+    searchInput.addEventListener("input", renderUIDTable);
+  }
+  if (statusFilter && !statusFilter._bound) {
+    statusFilter._bound = true;
+    statusFilter.addEventListener("change", renderUIDTable);
+  }
+}
+
+async function lockSpecificUid(keyId, uid) {
+  const key = state.keysArray.find(x => x.id === keyId);
+  if (!key || !uid) return;
+
+  if (!key.lockedUids) key.lockedUids = {};
+  if (key.lockedUids[uid]) {
+    toast(`UID ${uid} đã được khóa trước đó.`);
+    return;
+  }
+
+  const reason = prompt(`Khóa UID ${uid} trên Key ${key.key || key.id}\nNhập lý do hoặc để trống:`);
+  if (reason === null) return;
+
+  key.lockedUids[uid] = {
+    lockedAt: Date.now(),
+    reason: reason.trim() || "Khóa theo UID",
+    byAdmin: "admin"
+  };
+
+  if (!key.devices || typeof key.devices !== "object") {
+    key.devices = {};
+  }
+  if (!key.devices[uid]) {
+    key.devices[uid] = Date.now();
+  }
+
+  await saveKeysToFirebase();
+  renderAllAdminViews();
+  toast(`Đã khóa UID ${uid}.`);
 }
 
 function bindKeyForm() {
@@ -489,6 +637,68 @@ async function deleteKeyNode(id) {
   await saveKeysToFirebase();
   renderAllAdminViews();
   toast("Đã xoá Key khỏi Firebase Database!");
+}
+
+async function lockLatestUid(id) {
+  const k = state.keysArray.find(x => x.id === id);
+  if (!k) return;
+
+  if (!k.devices || typeof k.devices !== 'object' || !Object.keys(k.devices).length) {
+    toast('Key này chưa có thiết bị HWID nào để khóa.');
+    return;
+  }
+
+  const latestUid = Object.keys(k.devices).sort((a, b) => (k.devices[a] || 0) - (k.devices[b] || 0)).pop();
+  if (!latestUid) {
+    toast('Không tìm thấy UID mới nhất để khóa.');
+    return;
+  }
+
+  const reason = prompt(`Khóa UID mới nhất cho key ${k.key || k.id}:\n${latestUid}\nNhập lý do hoặc để trống:`);
+  if (reason === null) {
+    return;
+  }
+
+  if (!k.lockedUids) {
+    k.lockedUids = {};
+  }
+
+  k.lockedUids[latestUid] = {
+    lockedAt: Date.now(),
+    reason: reason.trim() || 'Khóa theo UID mới nhất',
+    byAdmin: 'admin'
+  };
+
+  if (!k.devices[latestUid]) {
+    k.devices[latestUid] = Date.now();
+  }
+
+  k.status = 'revoked';
+  await saveKeysToFirebase();
+  renderAllAdminViews();
+  toast(`Đã khóa UID ${latestUid} cho Key.`);
+}
+
+async function revokeKeyNode(id) {
+  const k = state.keysArray.find(x => x.id === id);
+  if (!k) return;
+  if (k.status === 'revoked') {
+    toast('Key này đã bị khoá rồi.');
+    return;
+  }
+
+  const confirmLock = confirm(`Khoá toàn bộ key ${k.key || k.id}?
+Key sẽ chuyển sang trạng thái Revoked và không thể kích hoạt thêm thiết bị.`);
+  if (!confirmLock) return;
+
+  const reason = prompt(`Nhập lý do khoá key ${k.key || k.id} (tùy chọn):`);
+  k.status = 'revoked';
+  k.revokedAt = Date.now();
+  k.revokedReason = reason === null ? '' : reason.trim();
+
+  await saveKeysToFirebase();
+  renderAllAdminViews();
+  toast(`Đã khoá key ${k.key || k.id}.`);
 }
 
 function resetKeyForm() {
